@@ -31,6 +31,9 @@ if ( ! class_exists( 'Wkwctobag_Sync_Customer' ) ) {
 		 */
 		protected $helper = null;
 
+		/**
+		 * Constructor of this class.
+		 */
 		public function __construct() {
 			$this->helper           = Helper\Wkwctobag_Helper::get_instance();
 			$this->bagisto_base_url = $this->helper->get_bagisto_site_url() . '/api/admin/customers';
@@ -40,6 +43,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Customer' ) ) {
 		 * Sync customer.
 		 *
 		 * @param array $customer_info Customer info.
+		 *
+		 * @throws \Exception If the record cannot be synchronised with Bagisto.
 		 */
 		public function sync( $customer_info ) {
 			$response = array(
@@ -275,6 +280,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Customer' ) ) {
 		 * Get customer data.
 		 *
 		 * @param int $customer_id Customer ID.
+		 * @throws \Exception If the customer cannot be found.
+		 *
 		 * @return array Customer data.
 		 */
 		public function get_customer_data( $customer_id ) {
@@ -288,19 +295,34 @@ if ( ! class_exists( 'Wkwctobag_Sync_Customer' ) ) {
 
 			$customer = new \WC_Customer( $customer_id );
 
+			/*
+			 * Resolve each WooCommerce getter once up front. The fallback chains
+			 * below are the long form of the short ternaries they replace, and
+			 * hoisting keeps every getter called exactly once as before.
+			 */
+			$account_first_name  = $customer->get_first_name();
+			$account_last_name   = $customer->get_last_name();
+			$account_email       = $customer->get_email();
+			$billing_first_name  = $customer->get_billing_first_name();
+			$billing_last_name   = $customer->get_billing_last_name();
+			$billing_email       = $customer->get_billing_email();
+			$billing_phone       = $customer->get_billing_phone();
+			$shipping_first_name = $customer->get_shipping_first_name();
+			$shipping_last_name  = $customer->get_shipping_last_name();
+
 			$customer_data = array(
 				'id'               => $customer_id,
 				'display_name'     => $user->display_name,
-				'first_name'       => $customer->get_first_name() ?: $user->first_name ?: $user->display_name,
-				'last_name'        => $customer->get_last_name() ?: $user->last_name ?: $user->display_name,
-				'email'            => $customer->get_email() ?: $user->user_email,
+				'first_name'       => $account_first_name ? $account_first_name : ( $user->first_name ? $user->first_name : $user->display_name ),
+				'last_name'        => $account_last_name ? $account_last_name : ( $user->last_name ? $user->last_name : $user->display_name ),
+				'email'            => $account_email ? $account_email : $user->user_email,
 				'gender'           => get_user_meta( $customer_id, 'gender', true ),
 				'date_of_birth'    => get_user_meta( $customer_id, 'date_of_birth', true ),
-				'phone'            => $customer->get_billing_phone() ?: get_user_meta( $customer_id, 'phone', true ),
+				'phone'            => $billing_phone ? $billing_phone : get_user_meta( $customer_id, 'phone', true ),
 				'billing_address'  => array(
-					'first_name' => $customer->get_billing_first_name() ?: $user->first_name ?: $user->display_name,
-					'last_name'  => $customer->get_billing_last_name() ?: $user->last_name ?: $user->display_name,
-					'email'      => $customer->get_billing_email() ?: $user->user_email,
+					'first_name' => $billing_first_name ? $billing_first_name : ( $user->first_name ? $user->first_name : $user->display_name ),
+					'last_name'  => $billing_last_name ? $billing_last_name : ( $user->last_name ? $user->last_name : $user->display_name ),
+					'email'      => $billing_email ? $billing_email : $user->user_email,
 					'company'    => $customer->get_billing_company(),
 					'address_1'  => $customer->get_billing_address_1(),
 					'address_2'  => $customer->get_billing_address_2(),
@@ -311,8 +333,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Customer' ) ) {
 					'phone'      => $customer->get_billing_phone(),
 				),
 				'shipping_address' => array(
-					'first_name' => $customer->get_shipping_first_name() ?: $user->first_name ?: $user->display_name,
-					'last_name'  => $customer->get_shipping_last_name() ?: $user->last_name ?: $user->display_name,
+					'first_name' => $shipping_first_name ? $shipping_first_name : ( $user->first_name ? $user->first_name : $user->display_name ),
+					'last_name'  => $shipping_last_name ? $shipping_last_name : ( $user->last_name ? $user->last_name : $user->display_name ),
 					'company'    => $customer->get_shipping_company(),
 					'address_1'  => $customer->get_shipping_address_1(),
 					'address_2'  => $customer->get_shipping_address_2(),
@@ -475,16 +497,16 @@ if ( ! class_exists( 'Wkwctobag_Sync_Customer' ) ) {
 				}
 
 				$body = array(
-					'company_name'    => $customer_address['company_name'] ?: null,
-					'vat_id'          => $customer_address['vat_id'] ?: null,
+					'company_name'    => $customer_address['company_name'] ? $customer_address['company_name'] : null,
+					'vat_id'          => $customer_address['vat_id'] ? $customer_address['vat_id'] : null,
 					'first_name'      => $customer_address['first_name'],
 					'last_name'       => $customer_address['last_name'],
 					'address'         => $address_val,
 					'country'         => $customer_address['country'],
-					'state'           => $customer_address['state'] ?: null,
+					'state'           => $customer_address['state'] ? $customer_address['state'] : null,
 					'city'            => $customer_address['city'],
 					'postcode'        => $customer_address['postcode'],
-					'email'           => $customer_address['email'] ?: null,
+					'email'           => $customer_address['email'] ? $customer_address['email'] : null,
 					'phone'           => $customer_address['phone'],
 					'default_address' => $customer_address['default_address'] ? true : false,
 				);
@@ -500,8 +522,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Customer' ) ) {
 		 * Update customer address with Bagisto.
 		 *
 		 * @param int   $bagisto_customer_id Bagisto customer ID.
-		 * @param array $customer_address Customer address.
-		 * @param int   $address_id Bagisto customer address ID.
+		 * @param int   $address_id          Bagisto customer address ID.
+		 * @param array $customer_address     Customer address.
 		 *
 		 * @throws \Exception If unable to update customer address or validation error.
 		 *
@@ -519,16 +541,16 @@ if ( ! class_exists( 'Wkwctobag_Sync_Customer' ) ) {
 				}
 
 				$body = array(
-					'company_name'    => $customer_address['company_name'] ?: null,
-					'vat_id'          => $customer_address['vat_id'] ?: null,
+					'company_name'    => $customer_address['company_name'] ? $customer_address['company_name'] : null,
+					'vat_id'          => $customer_address['vat_id'] ? $customer_address['vat_id'] : null,
 					'first_name'      => $customer_address['first_name'],
 					'last_name'       => $customer_address['last_name'],
 					'address'         => $address_val,
 					'country'         => $customer_address['country'],
-					'state'           => $customer_address['state'] ?: null,
+					'state'           => $customer_address['state'] ? $customer_address['state'] : null,
 					'city'            => $customer_address['city'],
 					'postcode'        => $customer_address['postcode'],
-					'email'           => $customer_address['email'] ?: null,
+					'email'           => $customer_address['email'] ? $customer_address['email'] : null,
 					'phone'           => $customer_address['phone'],
 					'default_address' => $customer_address['default_address'] ? true : false,
 				);

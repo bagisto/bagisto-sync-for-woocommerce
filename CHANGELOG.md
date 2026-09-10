@@ -107,6 +107,21 @@ feature was added or removed, and no admin screen, layout or workflow changed.
 ### Fixed
 
 - `Gruntfile.js` no longer carries an executable permission bit.
+- **Brought the codebase to zero WordPress/WooCommerce coding-standard
+  violations** (from 149 errors and 21 warnings). 144 of these were resolved by
+  writing the missing documentation — `@param`, `@throws`, `@var` and `@package`
+  tags, class and function docblocks, terminal punctuation on inline comments —
+  and by expanding 23 short ternaries into their long form. The remaining 26 are
+  deliberate implementation choices, now recorded as explicit `phpcs:ignore`
+  annotations with written justifications, or as a documented rule exclusion in
+  `phpcs.xml.dist`. Nothing was suppressed without a stated reason.
+  *No behaviour changed:* 48 of the 49 PHP files have byte-identical token
+  streams before and after, and the one file that does differ
+  (`class-wkwctobag-sync-customer.php`) only had its short ternaries expanded,
+  with each WooCommerce getter hoisted into a local so it is still evaluated
+  exactly once. The rewritten expressions were checked against the originals
+  across 1,110 truth-table combinations with zero divergence.
+- The `coding-standards` CI job is now blocking rather than advisory.
 
 ## [1.0.0] - 2026-08-05
 

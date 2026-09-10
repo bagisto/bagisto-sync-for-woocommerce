@@ -13,7 +13,9 @@ defined( 'ABSPATH' ) || exit();
 use WKWCBAGCONNECTOR\Helper;
 
 if ( ! class_exists( 'Wkwctobag_Sync_Product' ) ) {
-
+	/**
+	 * Product sync class.
+	 */
 	class Wkwctobag_Sync_Product {
 
 		/**
@@ -30,6 +32,9 @@ if ( ! class_exists( 'Wkwctobag_Sync_Product' ) ) {
 		 */
 		protected $helper = null;
 
+		/**
+		 * Constructor of this class.
+		 */
 		public function __construct() {
 			$this->helper           = Helper\Wkwctobag_Helper::get_instance();
 			$this->bagisto_base_url = $this->helper->get_bagisto_site_url() . '/api/admin/catalog';
@@ -39,6 +44,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Product' ) ) {
 		 * Sync product with Bagisto.
 		 *
 		 * @param array $product_info Product info.
+		 *
+		 * @throws \Exception If the record cannot be synchronised with Bagisto.
 		 *
 		 * @return array
 		 */
@@ -187,6 +194,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Product' ) ) {
 		 * Get WooCommerce product data.
 		 *
 		 * @param int $product_id Product ID.
+		 *
+		 * @throws \Exception If the product cannot be found.
 		 *
 		 * @return array
 		 */
@@ -644,6 +653,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Product' ) ) {
 
 		/**
 		 * Get Bagisto product details by ID.
+		 *
+		 * @param int $id Bagisto product ID.
+		 *
+		 * @return array Bagisto product data.
 		 */
 		public function get_bagisto_product_details( $id ) {
 			$url = $this->bagisto_base_url . '/products/' . $id;
@@ -673,6 +686,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Product' ) ) {
 
 		/**
 		 * Get Bagisto product by SKU.
+		 *
+		 * @param string $sku Product SKU.
+		 *
+		 * @return array Bagisto product data.
 		 */
 		public function get_bagisto_product_by_sku( $sku ) {
 
@@ -868,6 +885,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Product' ) ) {
 
 		/**
 		 * Fetch Bagisto attribute detail.
+		 *
+		 * @param int $bagisto_attr_id Bagisto attribute ID.
+		 *
+		 * @return array Bagisto attribute data.
 		 */
 		private function get_bagisto_attribute_details( $bagisto_attr_id ) {
 			$url    = $this->helper->get_bagisto_site_url() . '/api/admin/catalog/attributes/' . $bagisto_attr_id;
@@ -878,6 +899,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Product' ) ) {
 
 		/**
 		 * Get option admin name and label dynamically supporting both snake_case and camelCase keys.
+		 *
+		 * @param array $opt Bagisto attribute option data.
+		 *
+		 * @return array Admin name and label pair.
 		 */
 		private function get_option_admin_name_and_label( $opt ) {
 			$admin_name = isset( $opt['adminName'] ) ? $opt['adminName'] : ( isset( $opt['admin_name'] ) ? $opt['admin_name'] : '' );

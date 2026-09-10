@@ -85,6 +85,11 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 			return static::$instance;
 		}
 
+		/**
+		 * Enqueue the admin stylesheet and script on the screens this plugin uses.
+		 *
+		 * @return void
+		 */
 		public function wkwctobag_enqueue_admin_scripts() {
 			$screen = get_current_screen();
 			if ( ! $screen ) {
@@ -332,6 +337,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Get searched users.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the search string is empty.
 		 */
 		public function get_searched_users() {
 			$response = array(
@@ -389,6 +396,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Get searched Bagisto customers.
+		 *
+		 * @throws \Exception If the security or capability check fails.
 		 */
 		public function get_searched_bagisto_customers() {
 			$response = array(
@@ -475,7 +484,11 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 		/**
 		 * Get searched products.
 		 *
-		 * @return array Product search response.
+		 * Sends the product search response as JSON and halts.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the search string is empty.
+		 *
+		 * @return void
 		 */
 		public function get_searched_products() {
 			$response = array(
@@ -532,7 +545,11 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 		/**
 		 * Get searched categories.
 		 *
-		 * @return array Category search response.
+		 * Sends the category search response as JSON and halts.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the search string is empty.
+		 *
+		 * @return void
 		 */
 		public function get_searched_categories() {
 			$response = array(
@@ -588,6 +605,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Bulk user sync.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function bulk_user_sync() {
 			$response = array(
@@ -735,6 +754,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Bulk category sync.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function bulk_category_sync() {
 			$response = array(
@@ -794,6 +815,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Bulk product sync.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function bulk_product_sync() {
 			$response = array(
@@ -860,6 +883,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Bulk order sync.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function bulk_order_sync() {
 			$response = array(
@@ -939,6 +964,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Bulk attribute sync.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function bulk_attribute_sync() {
 			$response = array(
@@ -995,6 +1022,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Bulk tax sync.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function bulk_tax_sync() {
 			global $wpdb;
@@ -1154,7 +1183,7 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 		 * @param int    $total Total items.
 		 */
 		private function update_active_sync_metadata( $type, $total ) {
-			// Update active types list (comma separated)
+			// Update active types list (comma separated).
 			$active_types = get_option( 'wkwctobag_active_sync_type', '' );
 			$types_array  = array_filter( explode( ',', $active_types ) );
 
@@ -1163,7 +1192,7 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 				update_option( 'wkwctobag_active_sync_type', implode( ',', $types_array ), false );
 			}
 
-			// Update initial totals for progress calculation
+			// Update initial totals for progress calculation.
 			$totals          = get_option( 'wkwctobag_active_sync_totals', array() );
 			$totals[ $type ] = intval( $total );
 			update_option( 'wkwctobag_active_sync_totals', $totals, false );
@@ -1177,7 +1206,7 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 		 * @param int $term_id Term ID.
 		 * @param int $tt_id Term taxonomy ID.
 		 */
-		public function auto_sync_category_create( $term_id, $tt_id ) {
+		public function auto_sync_category_create( $term_id, $tt_id ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Signature fixed by the created_product_cat hook.
 			$term_id  = intval( $term_id );
 			$settings = $this->helper->get_product_settings_data();
 			if ( ! empty( $settings['auto_sync_categories'] ) && 'enabled' === $settings['auto_sync_categories'] ) {
@@ -1193,7 +1222,7 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 		 * @param int $term_id Term ID.
 		 * @param int $tt_id Term taxonomy ID.
 		 */
-		public function auto_sync_category_update( $term_id, $tt_id ) {
+		public function auto_sync_category_update( $term_id, $tt_id ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Signature fixed by the edited_product_cat hook.
 			$term_id  = intval( $term_id );
 			$settings = $this->helper->get_product_settings_data();
 			if ( ! empty( $settings['update_categories'] ) && 'enabled' === $settings['update_categories'] ) {
@@ -1239,7 +1268,7 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 		 * @param int   $id   Added attribute ID.
 		 * @param array $data Attribute data.
 		 */
-		public function auto_sync_attribute_create( $id, $data ) {
+		public function auto_sync_attribute_create( $id, $data ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Signature fixed by the woocommerce_attribute_added hook.
 			$settings = $this->helper->get_product_settings_data();
 			if ( ! empty( $settings['auto_sync_attributes'] ) && 'enabled' === $settings['auto_sync_attributes'] ) {
 				$attribute_sync = new \WKWCBAGCONNECTOR\Helper\Sync\Attribute\Wkwctobag_Sync_Attribute();
@@ -1306,7 +1335,7 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 		 * @param int   $rate_id Rate ID.
 		 * @param array $rate    Rate details.
 		 */
-		public function auto_sync_tax( $rate_id, $rate = array() ) {
+		public function auto_sync_tax( $rate_id, $rate = array() ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Signature fixed by the woocommerce_tax_rate_added/updated hooks.
 			$settings = $this->helper->get_tax_settings_data();
 			if ( ! empty( $settings['auto_sync_taxes'] ) && 'enabled' === $settings['auto_sync_taxes'] ) {
 				$tax_sync = new \WKWCBAGCONNECTOR\Helper\Sync\Tax\Wkwctobag_Sync_Tax();
@@ -1369,7 +1398,7 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 		 * @param int      $user_id       User ID.
 		 * @param \WP_User $old_user_data User's prior data.
 		 */
-		public function auto_sync_user_profile_update( $user_id, $old_user_data = null ) {
+		public function auto_sync_user_profile_update( $user_id, $old_user_data = null ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Signature fixed by the profile_update hook.
 			if ( doing_action( 'profile_update' ) && is_admin() ) {
 				$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 				// phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -1537,6 +1566,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Selected users sync handler via AJAX.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function wkwctobag_selected_users_sync() {
 			$response = array(
@@ -1777,6 +1808,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Selected categories sync handler via AJAX.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function wkwctobag_selected_categories_sync() {
 			$response = array(
@@ -1923,6 +1956,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Selected products sync handler via AJAX.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function wkwctobag_selected_products_sync() {
 			$response = array(
@@ -2153,6 +2188,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Selected attributes sync handler via AJAX.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function wkwctobag_selected_attributes_sync() {
 			$response = array(
@@ -2395,6 +2432,8 @@ if ( ! class_exists( 'Wkwctobag_Admin_Functions' ) ) {
 
 		/**
 		 * Selected orders sync handler via AJAX.
+		 *
+		 * @throws \Exception If the security or capability check fails, or the sync cannot be queued.
 		 */
 		public function wkwctobag_selected_orders_sync() {
 			$response = array(

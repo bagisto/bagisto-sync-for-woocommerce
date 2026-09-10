@@ -41,6 +41,8 @@ if ( ! class_exists( 'Wkwctobag_Tax_Settings' ) ) {
 
 		/**
 		 * Settings data.
+		 *
+		 * @var array $data Settings data.
 		 */
 		protected $data = array(
 			'auto_sync_taxes' => 'enabled',
@@ -53,10 +55,10 @@ if ( ! class_exists( 'Wkwctobag_Tax_Settings' ) ) {
 		public function __construct() {
 			$this->helper = Helper\Wkwctobag_Helper::get_instance();
 
-			// WooCommerce standard tax classes + custom ones
+			// WooCommerce standard tax classes + custom ones.
 			$this->tax_classes = array_merge( array( '' ), \WC_Tax::get_tax_classes() );
 
-			// Fetch Bagisto tax categories if connected
+			// Fetch Bagisto tax categories if connected.
 			if ( $this->helper->is_connected_with_bagisto() ) {
 				$url = $this->helper->get_bagisto_site_url() . '/api/admin/settings/tax-categories?per_page=500';
 				try {
@@ -65,8 +67,8 @@ if ( ! class_exists( 'Wkwctobag_Tax_Settings' ) ) {
 					if ( ! empty( $decoded['data'] ) ) {
 						$this->bagisto_tax_categories = $decoded['data'];
 					}
-				} catch ( \Exception $e ) {
-					// Silent ignore
+				} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch -- The mapping table renders empty when Bagisto is unreachable.
+					// Silent ignore.
 				}
 			}
 

@@ -1,6 +1,8 @@
 <?php
 /**
  * Sync data class file.
+ *
+ * @package Bagisto Sync for WooCommerce
  */
 
 namespace WKWCBAGCONNECTOR\Helper\Sync;

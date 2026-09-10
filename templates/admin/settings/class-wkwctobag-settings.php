@@ -46,7 +46,7 @@ if ( ! class_exists( 'Wkwctobag_Settings' ) ) {
 				echo '<div class="wrap">';
 				echo '<h1>' . esc_html__( 'Connector Settings', 'bagisto-sync-for-woocommerce' ) . '</h1>';
 
-				// Render tab navigation
+				// Render tab navigation.
 				echo '<nav class="nav-tab-wrapper">';
 				foreach ( $tabs as $tab_name => $tab_label ) {
 					$tab_url = add_query_arg( 'tab', $tab_name );

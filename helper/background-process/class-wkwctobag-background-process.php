@@ -33,7 +33,9 @@ if ( ! class_exists( 'Wkwctobag_Background_Process' ) ) {
 
 
 		/**
-		 * @var string
+		 * Sync type handled by this queue instance.
+		 *
+		 * @var string $sync_type Sync type.
 		 */
 		protected $sync_type = 'general';
 
@@ -45,7 +47,9 @@ if ( ! class_exists( 'Wkwctobag_Background_Process' ) ) {
 		protected $sync_data_instance = null;
 
 		/**
-		 * Constructor
+		 * Constructor.
+		 *
+		 * @param string $sync_type Sync type handled by this queue instance.
 		 */
 		public function __construct( $sync_type = 'general' ) {
 			$this->sync_type          = $sync_type;
@@ -93,6 +97,8 @@ if ( ! class_exists( 'Wkwctobag_Background_Process' ) ) {
 		 *
 		 * @param mixed $item Queue item to iterate over.
 		 *
+		 * @throws \Exception If the queue item cannot be processed.
+		 *
 		 * @return mixed
 		 */
 		protected function task( $item ) {
@@ -126,7 +132,7 @@ if ( ! class_exists( 'Wkwctobag_Background_Process' ) ) {
 						$has_logged_disconnect[ $type ] = true;
 					}
 
-					return false; // Stop immediately, do not retry
+					return false; // Stop immediately, do not retry.
 				}
 
 				$this->is_processing = true;
@@ -138,7 +144,7 @@ if ( ! class_exists( 'Wkwctobag_Background_Process' ) ) {
 						if ( ! empty( $item['type'] ) ) {
 							Sync\Wkwctobag_Sync_Status::set_state( $item['type'], 'token_error', esc_html__( 'Token expired mid-sync. Please reconnect and re-run.', 'bagisto-sync-for-woocommerce' ) );
 						}
-						return false; // Stop immediately, do not retry
+						return false; // Stop immediately, do not retry.
 					}
 					throw new \Exception( $result['message'] ?? 'Sync failed.' );
 				}

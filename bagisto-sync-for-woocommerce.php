@@ -137,6 +137,7 @@ if ( ! function_exists( 'wkwctobag_register_cron_schedules' ) ) {
 		return $schedules;
 	}
 
+	// phpcs:ignore WordPress.WP.CronInterval.CronSchedulesInterval -- The background queue health check is intentionally every 5 minutes.
 	add_filter( 'cron_schedules', 'wkwctobag_register_cron_schedules' );
 }
 

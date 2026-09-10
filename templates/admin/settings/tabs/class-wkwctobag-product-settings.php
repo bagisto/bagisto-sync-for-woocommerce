@@ -42,6 +42,8 @@ if ( ! class_exists( 'Wkwctobag_Product_Settings' ) ) {
 
 		/**
 		 * Settings data.
+		 *
+		 * @var array $data Settings data.
 		 */
 		protected $data = array(
 			'auto_sync_products'   => 'enabled',

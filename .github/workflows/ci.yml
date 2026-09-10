@@ -54,17 +54,10 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v3
 
-      # The ruleset is enforced strictly, but the pre-existing codebase carries a
-      # documented baseline of ~149 documentation/style violations (no security
-      # findings). This job is advisory until that baseline reaches zero; new
-      # code must not add to it. See "Coding standards" in CONTRIBUTING.md.
-      - name: PHP_CodeSniffer (advisory while the baseline is paid down)
-        continue-on-error: true
+      # The codebase is clean against the ruleset: 0 errors, 0 warnings.
+      # This job is blocking, so any new violation fails the build.
+      - name: PHP_CodeSniffer
         run: composer phpcs
-
-      - name: PHP_CodeSniffer summary
-        if: always()
-        run: ./vendor/bin/phpcs --report=summary --no-colors || true
 
   plugin-check:
     name: WordPress Plugin Check

@@ -368,7 +368,7 @@ composer install  # PHP lint + coding standards (dev only)
 | `composer lint` | PHP syntax check across every plugin file. |
 | `composer phpcs` | WordPress + WooCommerce coding standards (`phpcs.xml.dist`). |
 | `composer phpcbf` | Auto-fix the safely fixable standards violations. |
-| `composer check` | `lint` + `phpcs`. |
+| `composer check` | `lint` + `phpcs`. The codebase is clean: 0 errors, 0 warnings. |
 
 Build entry point: `src/js/admin/index.js` + `src/scss/admin.scss` → `assets/js/admin.js` + `assets/css/admin.css` (Webpack 5, Babel with the WordPress preset, `mini-css-extract-plugin`, `sass-loader`).
 
@@ -672,7 +672,7 @@ Known limitations in the current release:
 - **Bulk product sync only covers published products**; drafts and private products are skipped.
 - **Failed items retry three times** and are then recorded as permanently failed; there is no UI to re-queue them individually — re-run the relevant sync instead.
 - **No uninstall routine.** Options, user/term/post/order meta and log files are left in place when the plugin is deleted.
-- **No automated test suite.** Continuous integration runs PHP linting across 7.4–8.4, WordPress/WooCommerce coding standards, WordPress Plugin Check, an i18n text-domain check, a build reproducibility check and package validation — but there are no unit or integration tests yet, so functional changes must be verified manually.
+- **No automated test suite.** Continuous integration runs PHP linting across 7.4–8.4, WordPress/WooCommerce coding standards (clean and blocking), WordPress Plugin Check, an i18n text-domain check, a build reproducibility check and package validation — but there are no unit or integration tests yet, so functional changes must be verified manually.
 - **The admin bundle ships its own copy of jQuery and Select2** (~213 KB minified) while also declaring `jquery` and `select2` as script dependencies, so jQuery can be loaded twice on plugin screens. Fixing this would change the shipped bundle and risks a UI regression, so it is deliberately deferred.
 - **A few admin strings rendered from JavaScript are not translatable** (for example the injected attribute bulk-action toolbar labels). Fixing this requires editing `src/` and rebuilding the bundle.
 - **Bulk sync materialises the full record set in one request** (`'number' => -1` / `'limit' => -1`) before queueing. Very large catalogues may exhaust memory at that point; sync in smaller selections from the list tables if you hit this.

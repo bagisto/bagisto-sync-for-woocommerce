@@ -22,8 +22,13 @@ if ( ! class_exists( 'Wkwctobag_Logs' ) ) {
 			$this->get_logs_template();
 		}
 
+		/**
+		 * Render the logs screen.
+		 *
+		 * @return void
+		 */
 		public function get_logs_template() {
-			// Access our global singleton helper
+			// Access our global singleton helper.
 			$helper = \WKWCBAGCONNECTOR\Helper\Wkwctobag_Helper::get_instance();
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -32,7 +37,7 @@ if ( ! class_exists( 'Wkwctobag_Logs' ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$limit = isset( $_GET['limit'] ) ? max( 50, intval( wp_unslash( $_GET['limit'] ) ) ) : 200;
 
-			// Process deletion if requested
+			// Process deletion if requested.
 			if ( isset( $_GET['delete-log'] ) && isset( $_GET['_wpnonce'] ) ) {
 				$delete_source = sanitize_text_field( wp_unslash( $_GET['delete-log'] ) );
 				if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'delete_log_' . $delete_source ) ) {
@@ -41,7 +46,7 @@ if ( ! class_exists( 'Wkwctobag_Logs' ) ) {
 				}
 			}
 
-			// Process retention setting update
+			// Process retention setting update.
 			if ( isset( $_POST['wkwctobag_save_log_retention'] ) && isset( $_POST['_wpnonce'] ) ) {
 				if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'wkwctobag_log_retention_action' ) ) {
 					$retention = isset( $_POST['wkwctobag_log_retention'] ) ? sanitize_text_field( wp_unslash( $_POST['wkwctobag_log_retention'] ) ) : '30';
@@ -67,7 +72,7 @@ if ( ! class_exists( 'Wkwctobag_Logs' ) ) {
 				}
 			}
 
-			// Process manual purge action
+			// Process manual purge action.
 			if ( isset( $_POST['wkwctobag_purge_expired_logs'] ) && isset( $_POST['_wpnonce'] ) ) {
 				if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'wkwctobag_log_retention_action' ) ) {
 					$count   = $helper->logger->clean_expired_logs();
@@ -224,7 +229,7 @@ if ( ! class_exists( 'Wkwctobag_Logs' ) ) {
 												$log_level = '[' . $matches[2] . ']';
 												$log_msg   = $matches[3];
 
-												// Check for JSON context
+												// Check for JSON context.
 												$context_pos = strrpos( $log_msg, ' | {' );
 												if ( false !== $context_pos ) {
 													$context_json = substr( $log_msg, $context_pos + 3 );

@@ -20,6 +20,8 @@ if ( ! class_exists( 'Wkwctobag_Order_Settings' ) ) {
 	class Wkwctobag_Order_Settings {
 		/**
 		 * Settings data.
+		 *
+		 * @var array $data Settings data.
 		 */
 		protected $data = array(
 			'auto_sync_order'              => 'enabled',
@@ -140,7 +142,7 @@ if ( ! class_exists( 'Wkwctobag_Order_Settings' ) ) {
 										<?php
 										$saved_guest_customer_id = ! empty( $this->data['wc_bagisto_guest_customer_id'] ) ? intval( $this->data['wc_bagisto_guest_customer_id'] ) : 0;
 										if ( $saved_guest_customer_id > 0 ) {
-											// Get customer details from Bagisto to pre-populate the label
+											// Get customer details from Bagisto to pre-populate the label.
 											$customer_name = esc_html__( 'Customer', 'bagisto-sync-for-woocommerce' ) . ' #' . $saved_guest_customer_id;
 											try {
 												$url       = $this->helper->get_bagisto_site_url() . '/api/admin/customers/' . $saved_guest_customer_id;
@@ -158,8 +160,8 @@ if ( ! class_exists( 'Wkwctobag_Order_Settings' ) ) {
 													$email         = ! empty( $cust_data['email'] ) ? $cust_data['email'] : '';
 													$customer_name = sprintf( '%s ( %s )', $name, $email );
 												}
-											} catch ( \Exception $e ) {
-												// Fallback to ID label if API call fails
+											} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch -- The label falls back to the raw ID rendered below.
+												// Fallback to ID label if API call fails.
 											}
 											?>
 											<option value="<?php echo esc_attr( $saved_guest_customer_id ); ?>" selected="selected"><?php echo esc_html( $customer_name ); ?></option>

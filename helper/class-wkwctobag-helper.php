@@ -66,11 +66,13 @@ if ( ! class_exists( 'Wkwctobag_Helper' ) ) {
 				$this->bagisto_admin_email = get_option( 'wkwctobag_bagisto_admin_email', null );
 			}
 
-			// Initialize the global logger instance
+			// Initialize the global logger instance.
 			$this->logger = new Wkwctobag_Logger( 'wkwctobag-sync' );
 		}
 
 		/**
+		 * Background process instances, keyed by sync type.
+		 *
 		 * @var Background_Process\Wkwctobag_Background_Process[] $background_processes Background processes instances.
 		 */
 		private $background_processes = array();
@@ -275,7 +277,7 @@ if ( ! class_exists( 'Wkwctobag_Helper' ) ) {
 		 */
 		public function login_to_bagisto( $site_url, $email, $password ) {
 			$args = array(
-				'body'      => wp_json_encode(
+				'body'    => wp_json_encode(
 					array(
 						'email'       => $email,
 						'password'    => $password,
@@ -437,17 +439,18 @@ if ( ! class_exists( 'Wkwctobag_Helper' ) ) {
 		/**
 		 * Get users.
 		 *
-		 * @param string $search_query Search query.
-		 * @param array  $filters Filters.
+		 * Example $filters value:
 		 *
-		 *  Filter example:
-		 *  array(
-		 *      'exclude_role' => array( 'customer', 'subscriber' ),
-		 *      'include_role' => array( 'customer', 'subscriber' ),
-		 *      'include_ids'  => array( 1, 2, 3 ),
-		 *      'exclude_ids'  => array( 1, 2, 3 ),
-		 *      'fields' => array( 'ID', 'user_login', 'user_email' ),
-		 *  )
+		 *     array(
+		 *         'exclude_role' => array( 'customer', 'subscriber' ),
+		 *         'include_role' => array( 'customer', 'subscriber' ),
+		 *         'include_ids'  => array( 1, 2, 3 ),
+		 *         'exclude_ids'  => array( 1, 2, 3 ),
+		 *         'fields'       => array( 'ID', 'user_login', 'user_email' ),
+		 *     )
+		 *
+		 * @param string $search_query Search query.
+		 * @param array  $filters      Filters.
 		 *
 		 * @return array Users array.
 		 */
@@ -487,12 +490,15 @@ if ( ! class_exists( 'Wkwctobag_Helper' ) ) {
 		/**
 		 * Get products.
 		 *
+		 * Example $filters value:
+		 *
+		 *     array(
+		 *         'include_ids' => array( 1, 2, 3 ),
+		 *         'exclude_ids' => array( 1, 2, 3 ),
+		 *     )
+		 *
 		 * @param string $search_query Search query.
-		 * @param array  $filters Filters.
-		 *    $filters = array(
-		 *       'include_ids' => array( 1, 2, 3 ),
-		 *       'exclude_ids' => array( 1, 2, 3 ),
-		 *    );
+		 * @param array  $filters      Filters.
 		 *
 		 * @return array Array of WC_Product objects.
 		 */
@@ -524,12 +530,15 @@ if ( ! class_exists( 'Wkwctobag_Helper' ) ) {
 		/**
 		 * Get categories.
 		 *
+		 * Example $filters value:
+		 *
+		 *     array(
+		 *         'include_ids' => array( 1, 2, 3 ),
+		 *         'exclude_ids' => array( 1, 2, 3 ),
+		 *     )
+		 *
 		 * @param string $search_query Search query.
-		 * @param array  $filters Filters.
-		 *    $filters = array(
-		 *       'include_ids' => array( 1, 2, 3 ),
-		 *       'exclude_ids' => array( 1, 2, 3 ),
-		 *    );
+		 * @param array  $filters      Filters.
 		 *
 		 * @return array Array of WC_Category objects.
 		 */
@@ -725,7 +734,7 @@ if ( ! class_exists( 'Wkwctobag_Helper' ) ) {
 				throw new \Exception( esc_html__( 'Invalid request url.', 'bagisto-sync-for-woocommerce' ) );
 			}
 
-			// Determine log source based on URL to dynamically route logs
+			// Determine log source based on URL to dynamically route logs.
 			$log_source = 'api';
 			if ( strpos( $url, '/categories' ) !== false ) {
 				$log_source = 'category';
@@ -778,9 +787,10 @@ if ( ! class_exists( 'Wkwctobag_Helper' ) ) {
 
 				foreach ( $body as $key => $value ) {
 					if ( $value instanceof \CURLFile ) {
-						$file_path     = $value->getFilename();
-						$file_name     = $value->getPostFilename();
-						$mime_type     = $value->getMimeType() ? $value->getMimeType() : 'image/jpeg';
+						$file_path = $value->getFilename();
+						$file_name = $value->getPostFilename();
+						$mime_type = $value->getMimeType() ? $value->getMimeType() : 'image/jpeg';
+						// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reads a local temp file into a multipart request body; WP_Filesystem adds no benefit here.
 						$file_contents = ( file_exists( $file_path ) && is_readable( $file_path ) ) ? file_get_contents( $file_path ) : '';
 
 						$multipart_body .= "--{$boundary}\r\n";

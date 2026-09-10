@@ -1,6 +1,8 @@
 <?php
 /**
  * User sync class file.
+ *
+ * @package Bagisto Sync for WooCommerce
  */
 
 namespace WKWCBAGCONNECTOR\Helper\Sync\User;
@@ -28,6 +30,9 @@ if ( ! class_exists( 'Wkwctobag_Sync_User' ) ) {
 		 */
 		protected $helper = null;
 
+		/**
+		 * Constructor of this class.
+		 */
 		public function __construct() {
 			$this->helper = Helper\Wkwctobag_Helper::get_instance();
 

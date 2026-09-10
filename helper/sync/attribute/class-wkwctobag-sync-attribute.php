@@ -13,7 +13,9 @@ defined( 'ABSPATH' ) || exit();
 use WKWCBAGCONNECTOR\Helper;
 
 if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
-
+	/**
+	 * Attribute sync class.
+	 */
 	class Wkwctobag_Sync_Attribute {
 
 		/**
@@ -30,6 +32,9 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 		 */
 		protected $helper = null;
 
+		/**
+		 * Constructor of this class.
+		 */
 		public function __construct() {
 			$this->helper           = Helper\Wkwctobag_Helper::get_instance();
 			$this->bagisto_base_url = $this->helper->get_bagisto_site_url() . '/api/admin/catalog';
@@ -39,6 +44,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 		 * Main background entry point for attribute sync task.
 		 *
 		 * @param array $item Queue task item.
+		 * @throws \Exception If the record cannot be synchronised with Bagisto.
+		 *
 		 * @return array
 		 */
 		public function sync( $item ) {
@@ -136,6 +143,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Retrieve mapped Bagisto attribute ID from options.
+		 *
+		 * @param string $taxonomy_slug WooCommerce attribute taxonomy slug.
+		 *
+		 * @return int|null Bagisto attribute ID, or null when not mapped.
 		 */
 		public function get_bagisto_attribute_id( $taxonomy_slug ) {
 			$mappings = get_option( 'wkwctobag_attribute_mappings', array() );
@@ -144,6 +155,11 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Save mapped Bagisto attribute ID.
+		 *
+		 * @param string $taxonomy_slug   WooCommerce attribute taxonomy slug.
+		 * @param int    $bagisto_attr_id Bagisto attribute ID.
+		 *
+		 * @return void
 		 */
 		public function update_bagisto_attribute_id( $taxonomy_slug, $bagisto_attr_id ) {
 			$mappings                   = get_option( 'wkwctobag_attribute_mappings', array() );
@@ -153,6 +169,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Delete mapped Bagisto attribute ID.
+		 *
+		 * @param string $taxonomy_slug WooCommerce attribute taxonomy slug.
+		 *
+		 * @return void
 		 */
 		public function delete_bagisto_attribute_mapping( $taxonomy_slug ) {
 			$mappings = get_option( 'wkwctobag_attribute_mappings', array() );
@@ -164,6 +184,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Check if attribute ID exists in Bagisto.
+		 *
+		 * @param int $bagisto_attr_id Bagisto attribute ID.
+		 *
+		 * @return bool True when the attribute exists in Bagisto.
 		 */
 		private function bagisto_attribute_exists( $bagisto_attr_id ) {
 			$url    = $this->bagisto_base_url . '/attributes/' . $bagisto_attr_id;
@@ -174,6 +198,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Get attribute by code fallback from Bagisto.
+		 *
+		 * @param string $code Bagisto attribute code.
+		 *
+		 * @return int|null Bagisto attribute ID, or null when not found.
 		 */
 		private function get_bagisto_attribute_id_by_code( $code ) {
 			$url       = $this->bagisto_base_url . '/attributes?code=' . rawurlencode( $code ) . '&pagination=0';
@@ -192,6 +220,13 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Synchronize full attribute details and options.
+		 *
+		 * @param array    $attribute       WooCommerce attribute data.
+		 * @param int|null $bagisto_attr_id Existing Bagisto attribute ID, when known.
+		 *
+		 * @throws \Exception If the attribute cannot be created or updated in Bagisto.
+		 *
+		 * @return array Sync response.
 		 */
 		private function sync_attribute_with_bagisto( $attribute, $bagisto_attr_id = null ) {
 			$response = array(
@@ -527,6 +562,11 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Synchronize options only.
+		 *
+		 * @param array $attribute       WooCommerce attribute data.
+		 * @param int   $bagisto_attr_id Bagisto attribute ID.
+		 *
+		 * @return array Sync response.
 		 */
 		private function sync_attribute_options_only( $attribute, $bagisto_attr_id ) {
 			return $this->sync_attribute_with_bagisto( $attribute, $bagisto_attr_id );
@@ -534,6 +574,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Fetch Bagisto attribute detail.
+		 *
+		 * @param int $bagisto_attr_id Bagisto attribute ID.
+		 *
+		 * @return array Bagisto attribute data.
 		 */
 		private function get_bagisto_attribute_details( $bagisto_attr_id ) {
 			$url    = $this->bagisto_base_url . '/attributes/' . $bagisto_attr_id;
@@ -544,6 +588,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Attribute' ) ) {
 
 		/**
 		 * Get option admin name and label dynamically supporting both snake_case and camelCase keys.
+		 *
+		 * @param array $opt Bagisto attribute option data.
+		 *
+		 * @return array Admin name and label pair.
 		 */
 		private function get_option_admin_name_and_label( $opt ) {
 			$admin_name = isset( $opt['adminName'] ) ? $opt['adminName'] : ( isset( $opt['admin_name'] ) ? $opt['admin_name'] : '' );

@@ -13,7 +13,9 @@ defined( 'ABSPATH' ) || exit();
 use WKWCBAGCONNECTOR\Helper;
 
 if ( ! class_exists( 'Wkwctobag_Sync_Category' ) ) {
-
+	/**
+	 * Category sync class.
+	 */
 	class Wkwctobag_Sync_Category {
 
 		/**
@@ -30,6 +32,9 @@ if ( ! class_exists( 'Wkwctobag_Sync_Category' ) ) {
 		 */
 		protected $helper = null;
 
+		/**
+		 * Constructor of this class.
+		 */
 		public function __construct() {
 			$this->helper           = Helper\Wkwctobag_Helper::get_instance();
 			$this->bagisto_base_url = $this->helper->get_bagisto_site_url() . '/api/admin/catalog';
@@ -39,6 +44,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Category' ) ) {
 		 * Sync category with Bagisto.
 		 *
 		 * @param array $category_info Category info.
+		 *
+		 * @throws \Exception If the record cannot be synchronised with Bagisto.
 		 *
 		 * @return array
 		 */
@@ -70,7 +77,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Category' ) ) {
 					);
 				}
 
-				// Recursive parent sync to guarantee hierarchy in Bagisto
+				// Recursive parent sync to guarantee hierarchy in Bagisto.
 				$parent_id = ! empty( $category_data['parent'] ) ? intval( $category_data['parent'] ) : 0;
 				if ( $parent_id > 0 ) {
 					$bagisto_parent_id = $this->helper->get_bagisto_category_id( $parent_id );
@@ -271,7 +278,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Category' ) ) {
 
 					return $attribute_id;
 				}
-			} catch ( \Exception $ex ) {
+			} catch ( \Exception $ex ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch -- Falls through to the documented default attribute ID below.
 				// Fallback.
 			}
 
@@ -320,6 +327,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Category' ) ) {
 
 		/**
 		 * Get Bagisto product categories.
+		 *
+		 * @throws \Exception If the Bagisto category list cannot be retrieved.
 		 *
 		 * @return array
 		 */
@@ -385,7 +394,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Category' ) ) {
 						}
 					}
 				}
-			} catch ( \Exception $ex ) {
+			} catch ( \Exception $ex ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch -- A lookup miss is not an error; the caller handles null.
 				// Fail silently and return null.
 			}
 			return null;

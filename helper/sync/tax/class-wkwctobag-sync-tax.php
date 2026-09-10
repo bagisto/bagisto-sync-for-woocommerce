@@ -13,7 +13,9 @@ defined( 'ABSPATH' ) || exit();
 use WKWCBAGCONNECTOR\Helper;
 
 if ( ! class_exists( 'Wkwctobag_Sync_Tax' ) ) {
-
+	/**
+	 * Tax sync class.
+	 */
 	class Wkwctobag_Sync_Tax {
 
 		/**
@@ -37,6 +39,9 @@ if ( ! class_exists( 'Wkwctobag_Sync_Tax' ) ) {
 		 */
 		private $tax_category_url = '';
 
+		/**
+		 * Constructor of this class.
+		 */
 		public function __construct() {
 			$this->helper           = Helper\Wkwctobag_Helper::get_instance();
 			$site_url               = $this->helper->get_bagisto_site_url();
@@ -44,6 +49,13 @@ if ( ! class_exists( 'Wkwctobag_Sync_Tax' ) ) {
 			$this->tax_category_url = $site_url . '/api/admin/settings/tax-categories';
 		}
 
+		/**
+		 * Main background entry point for the tax sync task.
+		 *
+		 * @param array $item Queue task item.
+		 *
+		 * @return array Sync response.
+		 */
 		public function sync( $item ) {
 			if ( empty( $item['sub_type'] ) ) {
 				return array(
@@ -268,6 +280,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Tax' ) ) {
 		 *
 		 * @param string $tax_class WooCommerce tax class.
 		 * @param string $update_existing_taxes Update option.
+		 * @throws \Exception If the tax category cannot be created or updated in Bagisto.
+		 *
 		 * @return array Sync result.
 		 */
 		public function sync_single_tax_category( $tax_class, $update_existing_taxes = 'yes' ) {
@@ -370,8 +384,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Tax' ) ) {
 									}
 								}
 							}
-						} catch ( \Exception $e ) {
-							// Silent ignore search error
+						} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch -- An optional lookup; the fallback path below still runs.
+							// Silent ignore search error.
 						}
 
 						if ( ! $fallback_rate_id ) {

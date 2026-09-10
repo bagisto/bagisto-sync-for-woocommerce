@@ -65,7 +65,7 @@ if ( ! class_exists( 'Wkwctobag_Logger' ) ) {
 
 			$index_file = trailingslashit( $this->log_dir ) . 'index.php';
 			if ( ! file_exists( $index_file ) ) {
-				file_put_contents( $index_file, '<?php // Silence is golden.' );
+				file_put_contents( $index_file, '<?php // Silence is golden.' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- Runs before WP_Filesystem is available and must not prompt for credentials.
 			}
 
 			/*
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Wkwctobag_Logger' ) ) {
 					. "\tOrder allow,deny\n"
 					. "\tDeny from all\n"
 					. "</IfModule>\n";
-				file_put_contents( $htaccess_file, $htaccess_rules );
+				file_put_contents( $htaccess_file, $htaccess_rules ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- Runs before WP_Filesystem is available and must not prompt for credentials.
 			}
 		}
 
@@ -336,6 +336,7 @@ if ( ! class_exists( 'Wkwctobag_Logger' ) ) {
 				return 0;
 			}
 
+			// phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Must match current_time( 'Y-m-d H:i:s' ) used when writing log lines, so retention compares like with like.
 			$now_timestamp  = current_time( 'timestamp' );
 			$retention_days = intval( $days );
 			if ( $retention_days <= 0 ) {
@@ -352,7 +353,7 @@ if ( ! class_exists( 'Wkwctobag_Logger' ) ) {
 
 			$cleaned_count = 0;
 
-			// Close open file streams to release locks before maintenance
+			// Close open file streams to release locks before maintenance.
 			foreach ( $this->file_streams as $source => $stream ) {
 				$this->file_streams[ $source ] = null;
 			}
@@ -390,7 +391,7 @@ if ( ! class_exists( 'Wkwctobag_Logger' ) ) {
 											$fresh_lines[] = $line;
 										}
 									} else {
-										// Retain lines without timestamps or non-standard format
+										// Retain lines without timestamps or non-standard format.
 										$fresh_lines[] = $line;
 									}
 								}
@@ -398,7 +399,7 @@ if ( ! class_exists( 'Wkwctobag_Logger' ) ) {
 									if ( empty( $fresh_lines ) ) {
 										wp_delete_file( $file_path );
 									} else {
-										file_put_contents( $file_path, implode( "\n", $fresh_lines ) . "\n" );
+										file_put_contents( $file_path, implode( "\n", $fresh_lines ) . "\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- Log rotation runs on cron, where WP_Filesystem may be unavailable.
 									}
 									++$cleaned_count;
 								}
@@ -417,8 +418,8 @@ if ( ! class_exists( 'Wkwctobag_Logger' ) ) {
 						}
 					}
 				}
-			} catch ( \Exception $e ) {
-				// Silence iterator exceptions gracefully
+			} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch -- Log cleanup is best effort; an unreadable entry must not abort the run.
+				// Silence iterator exceptions gracefully.
 			}
 
 			return $cleaned_count;

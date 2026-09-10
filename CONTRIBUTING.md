@@ -133,24 +133,33 @@ Also:
 
 JavaScript lives in `src/js/` and is transpiled by Babel with the WordPress preset. Keep it framework-free — the admin bundle deliberately depends only on jQuery and Select2.
 
-### The coding-standards baseline
+### Coding standards are clean and enforced
 
-`composer phpcs` currently reports a baseline of roughly **149 errors and 21 warnings** inherited from the pre-release codebase. Every one of them is a documentation or style issue — missing `@param`/`@throws` tags, inline comments without a terminating full stop, short ternaries — or a deliberate implementation choice flagged by a sniff:
+`composer phpcs` reports **0 errors and 0 warnings**, and the `coding-standards`
+CI job is **blocking**. Run it before you open a pull request:
 
-| Sniff | Why it is still reported |
-| --- | --- |
-| `WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode` | Switching to `rawurlencode()` changes how spaces are encoded in Bagisto API query strings (`+` vs `%20`). Needs testing against Bagisto before changing. |
-| `WordPress.WP.CronInterval.CronSchedulesInterval` | The background-queue health check runs every 5 minutes by design. |
-| `WordPress.WP.AlternativeFunctions.file_system_operations_*` | The logger writes its own files directly; moving it to `WP_Filesystem` is a behavioural change. |
-| `Generic.CodeAnalysis.EmptyStatement.DetectedCatch` | Deliberate "best effort" cleanup paths. |
+```bash
+composer check   # parallel-lint + phpcs
+```
 
-**There are no security findings in the baseline.** The `WordPress.Security.EscapeOutput` reports that used to appear were confined to `bin/`, which contains CLI-only developer scripts and is excluded from the ruleset and from the distributed package.
+A small number of deliberate deviations are recorded explicitly rather than
+silently ignored, so that each one is reviewable:
 
-The coding-standards CI job is therefore **advisory** rather than blocking. The expectation for contributors is simple:
+| Deviation | Where | Why |
+| --- | --- | --- |
+| `urlencode()` over `rawurlencode()` | `phpcs.xml.dist` (sniff muted, with a rationale and a "revisit" note) | Switching changes how a space is encoded on the wire (`+` → `%20`) in Bagisto API query strings. It needs testing against a live Bagisto instance before it is made. |
+| Empty `catch` blocks | 6 inline `phpcs:ignore` annotations | Deliberate best-effort paths; each annotation says what happens instead. |
+| Unused function parameters | 6 inline `phpcs:ignore` annotations | The signatures are fixed by the WordPress/WooCommerce hooks the methods are registered against. |
+| Direct `file_put_contents()` / `file_get_contents()` | 4 inline `phpcs:ignore` annotations | The logger runs before `WP_Filesystem` is available and must never prompt for credentials. |
+| `current_time( 'timestamp' )` | 1 inline `phpcs:ignore` annotation | Log retention must compare against the site-timezone stamps written into the log lines. |
+| 5-minute cron interval | 1 inline `phpcs:ignore` annotation | The background-queue health check is intentionally frequent. |
 
-> **Do not add new violations.** Run `composer phpcs` before and after your change and make sure your files are no worse than they were. Fixing existing violations in files you are already touching is welcome, as a separate commit from the functional change.
+**If you add a `phpcs:ignore`, always include a `--` reason.** An annotation
+without a justification will be sent back in review.
 
-Once the baseline reaches zero, remove `continue-on-error` from the `coding-standards` job in `.github/workflows/ci.yml`.
+There are no security-sniff findings: `WordPress.Security.EscapeOutput`,
+`WordPress.Security.NonceVerification`, `WordPress.Security.ValidatedSanitizedInput`
+and `WordPress.DB.PreparedSQL` all report zero.
 
 ---
 

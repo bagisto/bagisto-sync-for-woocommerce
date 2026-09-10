@@ -214,6 +214,8 @@ if ( ! class_exists( 'Wkwctobag_Connection' ) ) {
 		 *
 		 * @param string $site_url    Bagisto site URL.
 		 * @param string $admin_token Bagisto admin token.
+		 *
+		 * @throws \Exception If the site URL or API token is missing or invalid.
 		 */
 		public function connect( $site_url = '', $admin_token = '' ) {
 			try {

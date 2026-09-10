@@ -60,6 +60,22 @@
 		</properties>
 	</rule>
 
+	<!--
+		urlencode() is kept deliberately.
+
+		It appears in two places: building Bagisto Admin API query strings, and
+		building admin.php links on the Logs screen. Switching to rawurlencode()
+		changes how a space is encoded on the wire (+ becomes %20). That is a
+		change to request format rather than a defect, and it needs testing
+		against a live Bagisto instance before it is made, so the sniff is
+		muted rather than the calls being rewritten.
+
+		Revisit: replace with rawurlencode() once verified, then delete this block.
+	-->
+	<rule ref="WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode">
+		<severity>0</severity>
+	</rule>
+
 	<!-- Verify that the correct text domain is used everywhere. -->
 	<rule ref="WordPress.WP.I18n">
 		<properties>

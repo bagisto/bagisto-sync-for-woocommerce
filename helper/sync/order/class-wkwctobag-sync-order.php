@@ -59,6 +59,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 		 * Sync order.
 		 *
 		 * @param array $order_info Order info (optionally passed from queue runner).
+		 *
+		 * @throws \Exception If the record cannot be synchronised with Bagisto.
 		 */
 		public function sync( $order_info = array() ) {
 			$response = array(
@@ -174,13 +176,15 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 		 * Resolve customer for the order (including Guest Checkout Option B: register on-the-fly).
 		 *
 		 * @param \WC_Order $order Order instance.
+		 * @throws \Exception If the Bagisto customer cannot be resolved or created.
+		 *
 		 * @return int|null Customer ID.
 		 */
 		private function resolve_order_customer( $order ) {
 			$wc_customer_id = $order->get_customer_id();
 
 			if ( $wc_customer_id > 0 ) {
-				// Member checkout
+				// Member checkout.
 				$bagisto_customer_id = $this->helper->get_bagisto_customer_id( $wc_customer_id );
 
 				if ( ! empty( $bagisto_customer_id ) ) {
@@ -196,7 +200,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 					}
 				}
 
-				// Not mapped yet: Sync customer
+				// Not mapped yet: Sync customer.
 				$customer_sync     = new \WKWCBAGCONNECTOR\Helper\Sync\Customer\Wkwctobag_Sync_Customer();
 				$customer_settings = $this->helper->get_customer_settings_data();
 				$group             = ! empty( $customer_settings['wc_bagisto_customer_group'] ) ? intval( $customer_settings['wc_bagisto_customer_group'] ) : 1;
@@ -231,7 +235,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 				}
 			}
 
-			// Guest checkout or customer sync failed: Resolve by email
+			// Guest checkout or customer sync failed: Resolve by email.
 			$email = $order->get_billing_email();
 			$phone = $order->get_billing_phone();
 			if ( empty( $email ) && empty( $phone ) ) {
@@ -251,7 +255,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 					return intval( $existing['data'][0]['id'] );
 				}
 
-				// Create customer on-the-fly in Bagisto
+				// Create customer on-the-fly in Bagisto.
 				$customer_settings = $this->helper->get_customer_settings_data();
 				$group             = ! empty( $customer_settings['wc_bagisto_customer_group'] ) ? intval( $customer_settings['wc_bagisto_customer_group'] ) : 1;
 
@@ -302,6 +306,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 		 *
 		 * @param int       $cart_id Cart ID.
 		 * @param \WC_Order $order   Order instance.
+		 *
+		 * @throws \Exception If a line item cannot be added to the Bagisto cart.
 		 */
 		private function add_order_items_to_cart( $cart_id, $order ) {
 			$url             = $this->helper->get_bagisto_site_url() . '/api/admin/carts/' . $cart_id . '/items';
@@ -408,10 +414,10 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 							$product_sync = new \WKWCBAGCONNECTOR\Helper\Sync\Product\Wkwctobag_Sync_Product();
 							$product_sync->sync( array( 'product_id' => $sync_id ) );
 
-							// Re-fetch mapping
+							// Re-fetch mapping.
 							$bagisto_product_id = $this->helper->get_bagisto_product_id( $target_id );
 							if ( $bagisto_product_id ) {
-								// Retrieve tax category
+								// Retrieve tax category.
 								$verify_url = $this->helper->get_bagisto_site_url() . '/api/admin/catalog/products/' . $bagisto_product_id;
 								$res        = json_decode( $this->helper->bagisto_curl_request( $verify_url, 'GET' ), true );
 								$details    = isset( $res['data'] ) ? $res['data'] : $res;
@@ -432,7 +438,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 					$coupon_codes     = $order->get_coupon_codes();
 					$order_unit_price = ( ! empty( $coupon_codes ) ? floatval( $item->get_subtotal() ) : floatval( $item->get_total() ) ) / $item_qty;
 
-					// Fallback to mapping tax category from WooCommerce tax class if available
+					// Fallback to mapping tax category from WooCommerce tax class if available.
 					$tax_category_id = $this->helper->get_bagisto_tax_category_id( $item->get_tax_class() );
 
 					$this->helper->logger->wkwctobag_info( sprintf( 'Product "%s" is not available at WooCommerce or Bagisto. Creating a demo/temporary product on the fly.', $item->get_name() ), array( 'source' => 'order' ) );
@@ -506,7 +512,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 				}
 			}
 
-			// Add order fees line items if applicable (taxable & non-taxable fees)
+			// Add order fees line items if applicable (taxable & non-taxable fees).
 			if ( method_exists( $order, 'get_fees' ) && ! empty( $order->get_fees() ) ) {
 				foreach ( $order->get_fees() as $fee_id => $fee ) {
 					$fee_amount = floatval( $fee->get_total() ) + floatval( $fee->get_total_tax() );
@@ -546,7 +552,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 				}
 			}
 
-			// Add dynamic shipping fee line item if applicable
+			// Add dynamic shipping fee line item if applicable.
 			$shipping_cost = floatval( $order->get_shipping_total() ) + floatval( $order->get_shipping_tax() );
 			if ( $shipping_cost > 0.0 ) {
 				$demo_id = $this->get_or_create_shipping_demo_product( $shipping_cost );
@@ -587,11 +593,13 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 		 *
 		 * @param int       $cart_id Cart ID.
 		 * @param \WC_Order $order   Order instance.
+		 *
+		 * @throws \Exception If the billing or shipping address is incomplete or cannot be saved.
 		 */
 		private function save_cart_addresses( $cart_id, $order ) {
 			$url = $this->helper->get_bagisto_site_url() . '/api/admin/carts/' . $cart_id . '/addresses';
 
-			// Ensure billing address fields are available (address_1, city, country, and phone are required)
+			// Ensure billing address fields are available (address_1, city, country, and phone are required).
 			$billing_address_1 = $order->get_billing_address_1();
 			$billing_city      = $order->get_billing_city();
 			$billing_country   = $order->get_billing_country();
@@ -601,7 +609,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 				throw new \Exception( esc_html__( 'Failed to sync: Billing address (address 1, city, country, and phone) is missing in the WooCommerce order.', 'bagisto-sync-for-woocommerce' ) );
 			}
 
-			// Generate phone-based email fallback if billing email is missing
+			// Generate phone-based email fallback if billing email is missing.
 			$clean_phone    = ! empty( $billing_phone ) ? preg_replace( '/[^0-9]/', '', $billing_phone ) : '';
 			$email_fallback = ! empty( $clean_phone ) ? 'guest-' . $clean_phone . '@example.com' : 'guest-checkout@example.com';
 			$billing_email  = ! empty( $order->get_billing_email() ) ? $order->get_billing_email() : $email_fallback;
@@ -644,7 +652,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 					'phone'     => ! empty( $order->get_shipping_phone() ) ? $order->get_shipping_phone() : $billing_address['phone'],
 				);
 			} else {
-				// Copy from billing address when shipping is empty/unavailable
+				// Copy from billing address when shipping is empty/unavailable.
 				$shipping_address = array(
 					'firstName' => $billing_address['firstName'],
 					'lastName'  => $billing_address['lastName'],
@@ -689,17 +697,19 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 		 *
 		 * @param int       $cart_id Cart ID.
 		 * @param \WC_Order $order   Order instance.
+		 *
+		 * @throws \Exception If no shipping method can be selected on the Bagisto cart.
 		 */
 		private function save_cart_shipping_method( $cart_id, $order ) {
 			$url = $this->helper->get_bagisto_site_url() . '/api/admin/carts/' . $cart_id . '/shipping-methods';
 
 			$shipping_total = floatval( $order->get_shipping_total() ) + floatval( $order->get_shipping_tax() );
 
-			// Fetch available shipping methods from Bagisto
+			// Fetch available shipping methods from Bagisto.
 			$get_url = $this->helper->get_bagisto_site_url() . '/api/admin/carts/' . $cart_id . '/shipping-methods';
 			$get_res = json_decode( $this->helper->bagisto_curl_request( $get_url, 'GET' ), true );
 
-			$shipping_method   = 'flatrate_flatrate'; // default fallback
+			$shipping_method   = 'flatrate_flatrate'; // default fallback.
 			$available_methods = array();
 
 			if ( ! empty( $get_res['data'] ) && is_array( $get_res['data'] ) ) {
@@ -736,6 +746,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 		 *
 		 * @param int       $cart_id Cart ID.
 		 * @param \WC_Order $order   Order instance.
+		 *
+		 * @throws \Exception If no payment method can be selected on the Bagisto cart.
 		 */
 		private function save_cart_payment_method( $cart_id, $order ) {
 			$url = $this->helper->get_bagisto_site_url() . '/api/admin/carts/' . $cart_id . '/payment-methods';
@@ -743,7 +755,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 			$get_url = $this->helper->get_bagisto_site_url() . '/api/admin/carts/' . $cart_id . '/payment-methods';
 			$get_res = json_decode( $this->helper->bagisto_curl_request( $get_url, 'GET' ), true );
 
-			$payment_method = 'moneytransfer'; // default fallback for other payments
+			$payment_method = 'moneytransfer'; // default fallback for other payments.
 
 			if ( $order && $order->get_payment_method() === 'cod' ) {
 				$payment_method = 'cashondelivery';
@@ -821,7 +833,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 			$wc_status = 'wc-' . $status;
 			$action    = isset( $mappings[ $wc_status ] ) ? $mappings[ $wc_status ] : 'pending';
 
-			// Fallback defaults if mappings are empty
+			// Fallback defaults if mappings are empty.
 			if ( empty( $mappings ) ) {
 				if ( in_array( $status, array( 'processing', 'completed' ), true ) ) {
 					$action = 'invoice';
@@ -891,7 +903,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 				return;
 			}
 
-			// Ensure an invoice exists before refunding
+			// Ensure an invoice exists before refunding.
 			$invoices = array();
 			if ( ! empty( $order_details['invoices'] ) ) {
 				$invoices = $order_details['invoices'];
@@ -952,7 +964,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 		 * @param int       $bagisto_order_id Order ID.
 		 * @param \WC_Order $order            Order instance.
 		 */
-		private function create_invoice_for_order( $bagisto_order_id, $order ) {
+		private function create_invoice_for_order( $bagisto_order_id, $order ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Kept to mirror the sibling shipment/refund helpers and their call sites.
 			$order_details = $this->get_bagisto_order_details( $bagisto_order_id );
 			$status        = '';
 			if ( ! empty( $order_details['status'] ) ) {
@@ -1171,6 +1183,8 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 		 *
 		 * @param int    $cart_id     Cart ID.
 		 * @param string $coupon_code Coupon code.
+		 *
+		 * @throws \Exception If the coupon cannot be applied to the Bagisto cart.
 		 */
 		private function apply_cart_coupon( $cart_id, $coupon_code ) {
 			$url  = $this->helper->get_bagisto_site_url() . '/api/admin/carts/' . $cart_id . '/coupon';
@@ -1223,7 +1237,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 
 			$groups_url = $this->helper->get_bagisto_site_url() . '/api/admin/customers/groups';
 			$groups_res = json_decode( $this->helper->bagisto_curl_request( $groups_url, 'GET' ), true );
-			$group_ids  = array( 1 ); // Default customer group
+			$group_ids  = array( 1 ); // Default customer group.
 			if ( ! empty( $groups_res['data'] ) && is_array( $groups_res['data'] ) ) {
 				$group_ids = array();
 				foreach ( $groups_res['data'] as $group ) {
@@ -1275,7 +1289,7 @@ if ( ! class_exists( 'Wkwctobag_Sync_Order' ) ) {
 				$body['ends_till'] = $expiry_date->date( 'Y-m-d H:i:s' );
 			}
 
-			// Check if coupon rule already exists in Bagisto to perform update
+			// Check if coupon rule already exists in Bagisto to perform update.
 			$search_url  = $this->helper->get_bagisto_site_url() . '/api/admin/marketing/cart-rules?coupon_code=' . rawurlencode( $coupon_code );
 			$search_res  = json_decode( $this->helper->bagisto_curl_request( $search_url, 'GET' ), true );
 			$existing_id = null;
