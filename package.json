@@ -34,7 +34,7 @@
 	"license": "GPL-3.0-or-later",
 	"devDependencies": {
 		"@babel/cli": "^7.12.8",
-		"@babel/core": "^7.0.0-0",
+		"@babel/core": "^8.0.1",
 		"@babel/eslint-parser": "^7.15.8",
 		"@babel/plugin-transform-async-to-generator": "7.7.4",
 		"@babel/plugin-transform-react-jsx": "^7.18.6",
