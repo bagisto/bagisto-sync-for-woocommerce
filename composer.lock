@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d27cf05a6ac02679184ac0a3273a9e83",
+    "content-hash": "eec0a85d27ec1e40021a5a645ab6e735",
     "packages": [],
     "packages-dev": [
         {
@@ -633,23 +633,23 @@
         },
         {
             "name": "woocommerce/woocommerce-sniffs",
-            "version": "1.0.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/woocommerce-sniffs.git",
-                "reference": "e6da0c372573724806b270ec1d5d94988b8aec52"
+                "reference": "906c75a4127adeb835ddbc859a99a9dbff8891c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/woocommerce-sniffs/zipball/e6da0c372573724806b270ec1d5d94988b8aec52",
-                "reference": "e6da0c372573724806b270ec1d5d94988b8aec52",
+                "url": "https://api.github.com/repos/woocommerce/woocommerce-sniffs/zipball/906c75a4127adeb835ddbc859a99a9dbff8891c0",
+                "reference": "906c75a4127adeb835ddbc859a99a9dbff8891c0",
                 "shasum": ""
             },
             "require": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
-                "php": ">=7.0",
-                "phpcompatibility/phpcompatibility-wp": "^2.1.0",
-                "wp-coding-standards/wpcs": "^3.0.0"
+                "php": ">=7.2",
+                "phpcompatibility/phpcompatibility-wp": "^2.1.7",
+                "wp-coding-standards/wpcs": "^3.4.1"
             },
             "type": "phpcodesniffer-standard",
             "notification-url": "https://packagist.org/downloads/",
@@ -666,9 +666,9 @@
             ],
             "support": {
                 "issues": "https://github.com/woocommerce/woocommerce-sniffs/issues",
-                "source": "https://github.com/woocommerce/woocommerce-sniffs/tree/1.0.1"
+                "source": "https://github.com/woocommerce/woocommerce-sniffs/tree/2.0.0"
             },
-            "time": "2025-09-03T13:34:27+00:00"
+            "time": "2026-07-31T13:27:58+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -739,12 +739,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }
