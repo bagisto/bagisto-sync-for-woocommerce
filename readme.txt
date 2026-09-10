@@ -20,6 +20,8 @@ Bagisto Sync for WooCommerce provides store owners with the functionality to sea
 
 The connector helps reduce manual work by automatically sending updates from WooCommerce to Bagisto whenever changes are made. It also processes synchronization tasks in the background and maintains detailed sync logs, making it easy to manage large amounts of data and track every synchronization activity.
 
+Full documentation, with screenshots for every setting, is available at [wpdoc.webkul.com/bagisto-connector](https://wpdoc.webkul.com/bagisto-connector/).
+
 = Features =
 
 * Secure Token Authentication: Connect securely to Bagisto using Personal Access Tokens (PAT) with live connection verification.
@@ -40,6 +42,9 @@ If you find this plugin helpful and would like to support further development, p
 3. Configure the plugin using the plugin menu.
 
 == Frequently Asked Questions ==
+
+= Where is the documentation? =
+The complete setup, configuration and usage guide is at [wpdoc.webkul.com/bagisto-connector](https://wpdoc.webkul.com/bagisto-connector/).
 
 = How do I connect WooCommerce with Bagisto? =
 Go to Bagisto Sync for WooCommerce > Connection in your WordPress admin panel, enter your Bagisto Store URL and Admin API Token, and click Connect Store.

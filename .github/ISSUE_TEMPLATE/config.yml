@@ -9,9 +9,12 @@ contact_links:
   - name: 💬 Product or installation support
     url: https://webkul.com/ticket/
     about: For store-specific help, custom work and commercial support.
-  - name: 📖 Documentation
+  - name: 📖 User documentation
+    url: https://wpdoc.webkul.com/bagisto-connector/
+    about: Illustrated setup, configuration and usage guide with screenshots.
+  - name: 🛠️ Developer reference
     url: https://github.com/bagisto/bagisto-sync-for-woocommerce#readme
-    about: Installation, configuration, hooks reference, troubleshooting and FAQ.
+    about: Hooks, AJAX actions, cron jobs, directory structure and troubleshooting.
   - name: 🌐 Bagisto community
     url: https://bagisto.com/en/
     about: General Bagisto questions that are not specific to this connector.

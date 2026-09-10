@@ -5,8 +5,11 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.5%2B-21759b.svg)](https://wordpress.org/)
 [![WooCommerce](https://img.shields.io/badge/WooCommerce-9.0%2B-96588a.svg)](https://woocommerce.com/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%20–%208.4-777bb4.svg)](https://www.php.net/)
+[![Docs](https://img.shields.io/badge/docs-wpdoc.webkul.com-0a7cff.svg)](https://wpdoc.webkul.com/bagisto-connector/)
 
 > Module that connects WooCommerce products, users and orders with Bagisto.
+
+📖 **[User documentation](https://wpdoc.webkul.com/bagisto-connector/)** — illustrated setup, configuration and usage guide, with screenshots for every setting.
 
 A WordPress/WooCommerce plugin by [Webkul](https://profiles.wordpress.org/webkul/) that pushes WooCommerce store data — users, customers, categories, attributes, products, tax classes and rates, coupons and orders — into a [Bagisto](https://bagisto.com/) store through Bagisto's Admin REST API.
 
@@ -556,6 +559,7 @@ All participants are expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md
 | Request a feature | [Open an issue](https://github.com/bagisto/bagisto-sync-for-woocommerce/issues/new/choose) using the feature request template |
 | Report a security vulnerability | **Not** a public issue — follow [SECURITY.md](SECURITY.md) |
 | Get help with my specific store, or commission custom work | [Webkul support desk](https://webkul.com/ticket/) |
+| Follow the illustrated setup and usage guide | [User documentation](https://wpdoc.webkul.com/bagisto-connector/) |
 | Ask a general Bagisto question | [Bagisto community](https://bagisto.com/en/) |
 | Ask a general WooCommerce question | [WooCommerce support](https://woocommerce.com/support/) |
 

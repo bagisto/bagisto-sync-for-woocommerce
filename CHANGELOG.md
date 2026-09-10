@@ -35,6 +35,8 @@ are on record rather than lost in history.
   rotation, a configurable retention policy and a daily cleanup cron.
 - WooCommerce High-Performance Order Storage (HPOS) compatibility.
 - `README.md` — full project documentation.
+- Links to the user documentation at <https://wpdoc.webkul.com/bagisto-connector/>
+  from `README.md`, `readme.txt` and the GitHub issue templates.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `RELEASING.md`,
   `THIRD-PARTY-NOTICES.md`, `CHANGELOG.md`.
 - `.gitignore` (expanded), `.gitattributes`, `.editorconfig`, `.distignore`.
