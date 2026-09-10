@@ -169,10 +169,16 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      # Only the production tree ships to users; the build toolchain does not.
+      # Only the production tree ships to users; the build toolchain does not,
+      # so only this audit is allowed to fail the job.
       - name: Audit production dependencies
-        run: npm audit --omit=dev --audit-level=high
+        run: npm audit --omit=dev --audit-level=high --package-lock-only
 
+      # Informational only. The build toolchain (@wordpress/scripts pulls in
+      # Puppeteer, Lighthouse and webpack-dev-server) carries advisories that
+      # never reach a user's site. `|| true` keeps this from raising a failure
+      # annotation on a job that is not meant to gate anything.
       - name: Audit the full tree (informational)
-        continue-on-error: true
-        run: npm audit
+        run: |
+          npm audit --package-lock-only || true
+          echo "Advisories above affect build tooling only and do not ship."

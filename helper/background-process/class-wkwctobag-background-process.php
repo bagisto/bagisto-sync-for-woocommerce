@@ -12,6 +12,16 @@ defined( 'ABSPATH' ) || exit(); // Exit if access directly.
 
 use WKWCBAGCONNECTOR\Helper\Sync;
 
+/*
+ * Defence in depth. The bootstrap in the main plugin file already makes sure
+ * WP_Background_Process is loaded before anything can reach this file, but if
+ * this class is ever autoloaded through another path with the base class
+ * missing, return instead of fataling on the `extends` below.
+ */
+if ( ! class_exists( 'WP_Background_Process' ) ) {
+	return;
+}
+
 if ( ! class_exists( 'Wkwctobag_Background_Process' ) ) {
 	/**
 	 * Background process class.

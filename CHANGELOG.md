@@ -142,6 +142,24 @@ feature was added or removed, and no admin screen, layout or workflow changed.
   distributed package.
 - Updated every repository URL after the GitHub repository was renamed from
   `bagisto/woocommerce-connector` to `bagisto/bagisto-sync-for-woocommerce`.
+- **Fixed a fatal error when `WP_Background_Process` is unavailable.** The sync
+  queues extend that class, which this plugin does not bundle — it comes from
+  the copy WooCommerce ships and loads lazily. WordPress Plugin Check runs its
+  runtime checks with every other plugin filtered out of `active_plugins`, so
+  WooCommerce is absent and the plugin fataled with
+  `Class "WP_Background_Process" not found`. The bootstrap now loads
+  WooCommerce's `wp-async-request.php` and `wp-background-process.php`
+  explicitly when the class is not already present, and bails out quietly if
+  neither is available, instead of fataling. The queue class file carries a
+  matching guard. This also removes a latent production risk: the plugin
+  previously depended on some other code path having referenced a
+  `WC_Background_Process` subclass first.
+  Verified on WordPress 6.8.3 with WooCommerce 9.6.0 and WordPress 7.1 with
+  WooCommerce 11.0.0 — identical queue behaviour with WooCommerce present, and
+  a clean boot with WooCommerce absent. Plugin Check no longer reports a fatal.
+- The CI dependency-audit job no longer raises a failure annotation for
+  build-toolchain advisories that never ship to a user's site. Only the
+  production tree (`npm audit --omit=dev`) can fail that job.
 
 ## [1.0.0] - 2026-08-05
 

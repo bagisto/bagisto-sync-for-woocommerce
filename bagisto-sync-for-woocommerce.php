@@ -105,6 +105,53 @@ add_filter(
 	}
 );
 
+if ( ! function_exists( 'wkwctobag_load_background_process_library' ) ) {
+	/**
+	 * Make sure the WP_Background_Process base class is available.
+	 *
+	 * The sync queues extend WP_Background_Process, which this plugin does not
+	 * bundle. It comes from the copy WooCommerce ships in
+	 * includes/libraries/wp-background-process.php, and WooCommerce only loads
+	 * that file lazily, when one of its own WC_Background_Process subclasses is
+	 * first referenced. If nothing has referenced one yet, the class is missing
+	 * and extending it is a fatal error.
+	 *
+	 * That is not only theoretical. WordPress Plugin Check runs its runtime
+	 * checks with every other plugin filtered out of `active_plugins`, so
+	 * WooCommerce is not loaded at all and the plugin used to fatal during the
+	 * check.
+	 *
+	 * So: use the class if it is already loaded, otherwise load WooCommerce's
+	 * copy explicitly, and report failure if neither is possible.
+	 *
+	 * @return bool True when WP_Background_Process is available.
+	 */
+	function wkwctobag_load_background_process_library() {
+		if ( class_exists( 'WP_Background_Process' ) ) {
+			return true;
+		}
+
+		if ( ! defined( 'WC_ABSPATH' ) ) {
+			return false;
+		}
+
+		$async_request    = WC_ABSPATH . 'includes/libraries/wp-async-request.php';
+		$background_class = WC_ABSPATH . 'includes/libraries/wp-background-process.php';
+
+		if ( ! is_readable( $async_request ) || ! is_readable( $background_class ) ) {
+			return false;
+		}
+
+		if ( ! class_exists( 'WP_Async_Request' ) ) {
+			require_once $async_request;
+		}
+
+		require_once $background_class;
+
+		return class_exists( 'WP_Background_Process' );
+	}
+}
+
 if ( ! function_exists( 'wkwctobag_includes' ) ) {
 	/**
 	 * Includes function
@@ -112,6 +159,17 @@ if ( ! function_exists( 'wkwctobag_includes' ) ) {
 	 * @return void
 	 */
 	function wkwctobag_includes() {
+		/*
+		 * Without WP_Background_Process there are no sync queues, and every
+		 * entry point of this plugin runs through them. Bail out quietly rather
+		 * than fatally: WordPress already blocks activation without WooCommerce
+		 * through the "Requires Plugins" header, so this only triggers in
+		 * artificial situations such as a Plugin Check runtime scan.
+		 */
+		if ( ! wkwctobag_load_background_process_library() ) {
+			return;
+		}
+
 		require_once WKWCTOBAG_PLUGIN_FILE . 'includes/autoload.php';
 		Includes\Wkwctobag_File_Handler::get_instance();
 	}
