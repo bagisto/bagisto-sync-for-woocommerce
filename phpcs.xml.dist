@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<ruleset name="Bagisto Sync for WooCommerce">
+	<description>Coding standards for the Bagisto Sync for WooCommerce plugin.</description>
+
+	<!-- Scan the plugin source only. -->
+	<file>.</file>
+
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/assets/js/admin.js</exclude-pattern>
+	<exclude-pattern>*/assets/css/admin.css</exclude-pattern>
+	<exclude-pattern>*/languages/*</exclude-pattern>
+	<!--
+		bin/ holds developer-only command line scripts. They never run inside
+		WordPress and are excluded from the distributed package by .distignore,
+		so the WordPress web-output and escaping rules do not apply to them.
+	-->
+	<exclude-pattern>*/bin/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="basepath" value="."/>
+	<arg name="parallel" value="8"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<!-- WordPress and WooCommerce coding standards. -->
+	<rule ref="WordPress"/>
+	<rule ref="WordPress-Docs"/>
+
+	<config name="minimum_wp_version" value="6.5"/>
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- Verify that everything global is correctly prefixed. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="wkwctobag"/>
+				<element value="WKWCTOBAG"/>
+				<element value="WKWCBAGCONNECTOR"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!--
+		Capabilities registered by WooCommerce rather than WordPress core.
+		Without this the sniff reports every current_user_can( 'manage_woocommerce' )
+		call as an unknown capability.
+	-->
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="manage_woocommerce"/>
+				<element value="edit_shop_orders"/>
+				<element value="edit_others_shop_orders"/>
+				<element value="edit_products"/>
+				<element value="manage_product_terms"/>
+				<element value="view_woocommerce_reports"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Verify that the correct text domain is used everywhere. -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="bagisto-sync-for-woocommerce"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

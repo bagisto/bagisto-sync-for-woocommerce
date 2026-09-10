@@ -1,0 +1,46 @@
+# Files and directories excluded from the distributed plugin package.
+# Used by `wp dist-archive`; the "files" list in package.json is the equivalent
+# for `npm run zip`.
+
+# VCS and CI
+.git
+.gitignore
+.gitattributes
+.github
+.distignore
+.editorconfig
+
+# Development tooling
+node_modules
+vendor
+src
+bin
+babel.config.js
+webpack.config.js
+Gruntfile.js
+package.json
+package-lock.json
+composer.json
+composer.lock
+phpcs.xml.dist
+phpcs.xml
+phpunit.xml
+tests
+playwright-report
+test-results
+coverage
+
+# Contributor-facing documentation that is not shipped with the plugin.
+# README.md, LICENSE, CHANGELOG.md and SECURITY.md are deliberately kept.
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+RELEASING.md
+
+# Local artefacts
+.env
+.env.*
+*.log
+*.sql
+*.zip
+.DS_Store
+Thumbs.db

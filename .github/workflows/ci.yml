@@ -1,0 +1,185 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  php-lint:
+    name: PHP ${{ matrix.php }} syntax
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The plugin header declares support for PHP 7.4 through 8.4.
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Lint
+        run: composer lint
+
+  coding-standards:
+    name: Coding standards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer:v2
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v3
+
+      # The ruleset is enforced strictly, but the pre-existing codebase carries a
+      # documented baseline of ~149 documentation/style violations (no security
+      # findings). This job is advisory until that baseline reaches zero; new
+      # code must not add to it. See "Coding standards" in CONTRIBUTING.md.
+      - name: PHP_CodeSniffer (advisory while the baseline is paid down)
+        continue-on-error: true
+        run: composer phpcs
+
+      - name: PHP_CodeSniffer summary
+        if: always()
+        run: ./vendor/bin/phpcs --report=summary --no-colors || true
+
+  plugin-check:
+    name: WordPress Plugin Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Plugin Check
+        uses: wordpress/plugin-check-action@v1
+        with:
+          build-dir: './'
+
+  build:
+    name: Build and i18n
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify text domain
+        run: npm run i18n:check
+
+      - name: Production build
+        run: npm run buildr
+
+      - name: Fail if the committed assets are stale
+        run: |
+          if ! git diff --quiet -- assets/; then
+            echo "::error::The committed files in assets/ do not match a fresh build."
+            echo "Run 'npm run buildr' and commit the result."
+            git --no-pager diff --stat -- assets/
+            exit 1
+          fi
+          echo "Committed assets match a fresh production build."
+
+  package:
+    name: Package validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the distributable zip
+        run: npm run zip
+
+      - name: Ensure no development files were packaged
+        run: |
+          set -euo pipefail
+          zip_file="$(ls -1 *.zip | head -n 1)"
+          echo "Inspecting ${zip_file}"
+          unzip -l "${zip_file}"
+          # Note: wp-scripts plugin-zip follows npm-packlist, which always adds
+          # package.json, README*, LICENSE* and CHANGELOG*. Those are expected
+          # and harmless. Everything below must never ship.
+          if unzip -l "${zip_file}" | grep -Eq \
+            '(node_modules/|/vendor/|/src/|/bin/|/\.github/|/\.git|package-lock\.json|composer\.(json|lock)|webpack\.config\.js|babel\.config\.js|Gruntfile\.js|phpcs\.xml|/\.env|\.log$|\.sql$|\.sqlite$|\.bak$)'; then
+            echo "::error::Development-only files were included in the plugin package."
+            unzip -l "${zip_file}" | grep -E '(node_modules|/vendor/|/src/|/bin/|\.github|/\.git|package-lock|composer\.|webpack\.|babel\.|Gruntfile|phpcs\.|\.env|\.log|\.sql)'
+            exit 1
+          fi
+          echo "Package contains no development-only files."
+
+      - name: Ensure the package has no secrets or personal data
+        run: |
+          set -euo pipefail
+          zip_file="$(ls -1 *.zip | head -n 1)"
+          work="$(mktemp -d)"
+          unzip -q "${zip_file}" -d "${work}"
+          if grep -rIlEi \
+            '(-----BEGIN [A-Z ]*PRIVATE KEY|AKIA[0-9A-Z]{16}|xox[abprs]-[0-9A-Za-z-]{10,}|gh[pousr]_[0-9A-Za-z]{30,})' \
+            "${work}" 2>/dev/null | grep -q .; then
+            echo "::error::Possible credential material found in the plugin package."
+            exit 1
+          fi
+          echo "No credential patterns found in the package."
+
+      - name: Upload the package
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-package
+          path: '*.zip'
+          retention-days: 7
+
+  npm-audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Only the production tree ships to users; the build toolchain does not.
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Audit the full tree (informational)
+        continue-on-error: true
+        run: npm audit

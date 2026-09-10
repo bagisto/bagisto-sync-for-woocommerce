@@ -1,0 +1,123 @@
+name: Bug report
+description: Report something that is not working as documented.
+title: "[Bug]: "
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a report.
+
+        **Do not report security vulnerabilities here.** Follow the private
+        process in [SECURITY.md](https://github.com/bagisto/woocommerce-connector/blob/main/SECURITY.md) instead.
+
+        **Redact before posting:** never paste Bagisto API tokens, customer
+        names, e-mail addresses, order contents or full log files.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight
+      options:
+        - label: I searched existing issues and this is not a duplicate.
+          required: true
+        - label: This is not a security vulnerability.
+          required: true
+        - label: I have removed all tokens and personal data from anything I paste below.
+          required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: entity
+    attributes:
+      label: Which sync is affected?
+      multiple: true
+      options:
+        - Connection / authentication
+        - Users
+        - Customers
+        - Categories
+        - Attributes
+        - Products
+        - Taxes
+        - Orders
+        - Coupons
+        - Logs
+        - Not sync related
+    validations:
+      required: true
+
+  - type: dropdown
+    id: trigger
+    attributes:
+      label: How was the sync triggered?
+      options:
+        - Bulk Sync screen
+        - Bulk action on a list table
+        - Automatic sync on create/update
+        - Not applicable
+    validations:
+      required: true
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: WordPress / WooCommerce / PHP versions
+      placeholder: "WP 6.7.1, WooCommerce 9.4.2, PHP 8.2.20"
+    validations:
+      required: true
+
+  - type: input
+    id: bagisto-version
+    attributes:
+      label: Bagisto version
+      placeholder: "2.2.x"
+    validations:
+      required: true
+
+  - type: input
+    id: server
+    attributes:
+      label: Web server
+      placeholder: "Apache 2.4 / nginx 1.24 / LiteSpeed"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log excerpt
+      description: >
+        From WC to Bagisto → Logs. Paste only the relevant lines, with tokens,
+        e-mail addresses and customer names removed.
+      render: text
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Other active plugins, object cache, WP-Cron configuration, screenshots.

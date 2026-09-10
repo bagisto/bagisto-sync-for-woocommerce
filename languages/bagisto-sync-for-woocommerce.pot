@@ -1,0 +1,1672 @@
+# Copyright (C) 2026 Webkul
+# This file is distributed under the same license as the Bagisto Sync for WooCommerce package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Bagisto Sync for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/bagisto-sync-for-woocommerce\n"
+"POT-Creation-Date: 2026-08-05 14:02:12+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: bagisto-sync-for-woocommerce.php:109
+#. translators: %s: sync type (e.g. product, category, order)
+msgid "Every 5 Minutes (Bagisto %s Sync)"
+msgstr ""
+
+#: helper/background-process/class-wkwctobag-background-process.php:119
+msgid "Connection was removed mid-sync. Please reconnect to resume."
+msgstr ""
+
+#: helper/background-process/class-wkwctobag-background-process.php:139
+msgid "Token expired mid-sync. Please reconnect and re-run."
+msgstr ""
+
+#: helper/class-wkwctobag-helper.php:233
+msgid "Failed to connect. Please verify the Store URL and Token."
+msgstr ""
+
+#: helper/class-wkwctobag-helper.php:297
+msgid "Error Processing Request"
+msgstr ""
+
+#: helper/class-wkwctobag-helper.php:308
+msgid "Invalid site url please check your site url."
+msgstr ""
+
+#: helper/class-wkwctobag-helper.php:723
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:582
+#: includes/admin/class-wkwctobag-admin-functions.php:604
+#: includes/admin/class-wkwctobag-admin-functions.php:734
+#: includes/admin/class-wkwctobag-admin-functions.php:789
+#: includes/admin/class-wkwctobag-admin-functions.php:851
+#: includes/admin/class-wkwctobag-admin-functions.php:926
+#: includes/admin/class-wkwctobag-admin-functions.php:1510
+#: includes/admin/class-wkwctobag-admin-functions.php:1746
+#: includes/admin/class-wkwctobag-admin-functions.php:1888
+#: includes/admin/class-wkwctobag-admin-functions.php:2114
+#: includes/admin/class-wkwctobag-admin-functions.php:2349
+msgid ""
+"Not connected with Bagisto. Please create connection with Bagisto then try "
+"again."
+msgstr ""
+
+#: helper/class-wkwctobag-helper.php:727
+msgid "Invalid request url."
+msgstr ""
+
+#: helper/class-wkwctobag-helper.php:827
+#. translators: 1: HTTP method, 2: request URL
+msgid "Failed to connect to Bagisto API."
+msgstr ""
+
+#: helper/class-wkwctobag-helper.php:858
+#. translators: 1: HTTP status code, 2: HTTP method, 3: request URL
+msgid "Invalid Token"
+msgstr ""
+
+#: helper/sync/attribute/class-wkwctobag-sync-attribute.php:53
+msgid "Invalid attribute ID."
+msgstr ""
+
+#: helper/sync/attribute/class-wkwctobag-sync-attribute.php:68
+#. translators: %d: WooCommerce attribute ID
+msgid "Attribute ID %d not found in WooCommerce."
+msgstr ""
+
+#: helper/sync/attribute/class-wkwctobag-sync-attribute.php:309
+msgid "Attribute updated successfully."
+msgstr ""
+
+#: helper/sync/attribute/class-wkwctobag-sync-attribute.php:311
+msgid "Failed to update attribute on Bagisto."
+msgstr ""
+
+#: helper/sync/attribute/class-wkwctobag-sync-attribute.php:341
+msgid "Attribute created successfully."
+msgstr ""
+
+#: helper/sync/attribute/class-wkwctobag-sync-attribute.php:374
+msgid "Failed to create attribute on Bagisto."
+msgstr ""
+
+#: helper/sync/category/class-wkwctobag-sync-category.php:55
+#: helper/sync/category/class-wkwctobag-sync-category.php:293
+msgid "Invalid category ID."
+msgstr ""
+
+#: helper/sync/category/class-wkwctobag-sync-category.php:67
+#. translators: %d: Category ID.
+msgid "No category data found for category id %d"
+msgstr ""
+
+#: helper/sync/category/class-wkwctobag-sync-category.php:88
+#. translators: %1$d: parent category ID, %2$s: error message
+msgid "Failed to sync parent category ID %1$d: %2$s"
+msgstr ""
+
+#: helper/sync/category/class-wkwctobag-sync-category.php:139
+msgid "Category synced successfully."
+msgstr ""
+
+#: helper/sync/category/class-wkwctobag-sync-category.php:145
+msgid "Failed to sync category with Bagisto."
+msgstr ""
+
+#: helper/sync/category/class-wkwctobag-sync-category.php:299
+msgid "Category not found."
+msgstr ""
+
+#: helper/sync/category/class-wkwctobag-sync-category.php:356
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:594
+#: helper/sync/user/class-wkwctobag-sync-user.php:293
+msgid "Invalid response from Bagisto API."
+msgstr ""
+
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:53
+msgid "Invalid customer ID."
+msgstr ""
+
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:63
+#. translators: %d: User ID.
+msgid "Customer group is required for customer id %d"
+msgstr ""
+
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:73
+#. translators: %d: User ID.
+msgid "Customer gender is required for customer id %d"
+msgstr ""
+
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:85
+#. translators: %d: User ID.
+msgid "No customer data found for customer id %d"
+msgstr ""
+
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:171
+msgid "Failed to sync customer with Bagisto."
+msgstr ""
+
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:263
+msgid "Customer synced successfully with Bagisto."
+msgstr ""
+
+#: helper/sync/customer/class-wkwctobag-sync-customer.php:286
+msgid "Customer not found."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:76
+msgid "Invalid order ID."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:81
+msgid "Order not found."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:86
+msgid "Failed to sync: The order contains no items."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:97
+msgid "Failed to resolve or create customer in Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:103
+msgid "Failed to create draft cart in Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:139
+msgid "Failed to place order in Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:158
+msgid "Order synced successfully with Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:238
+msgid ""
+"Failed to sync: Guest checkout requires either a customer email or a phone "
+"number."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:446
+#. translators: %s: product name
+msgid "Failed to create demo product for \"%s\"."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:492
+#. translators: %s: product name
+msgid "Failed to add product \"%s\" to cart."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:517
+#. translators: %s: fee name
+msgid "Failed to resolve or create fee product \"%s\" in Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:529
+#. translators: %s: fee name
+msgid "Failed to add fee item \"%s\" to Bagisto draft cart."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:554
+msgid "Failed to resolve or create demo shipping product in Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:565
+msgid "Failed to add dynamic shipping fee item to Bagisto draft cart."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:601
+msgid ""
+"Failed to sync: Billing address (address 1, city, country, and phone) is "
+"missing in the WooCommerce order."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:672
+msgid "Failed to save cart addresses in Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:726
+msgid "Failed to save cart shipping method in Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:778
+msgid "Failed to save cart payment method in Bagisto."
+msgstr ""
+
+#: helper/sync/order/class-wkwctobag-sync-order.php:1187
+msgid "Failed to apply coupon."
+msgstr ""
+
+#: helper/sync/product/class-wkwctobag-sync-product.php:55
+msgid "Invalid product ID."
+msgstr ""
+
+#: helper/sync/product/class-wkwctobag-sync-product.php:67
+#. translators: %d: Product ID.
+msgid "No product data found for product id %d"
+msgstr ""
+
+#: helper/sync/product/class-wkwctobag-sync-product.php:131
+#: helper/sync/product/class-wkwctobag-sync-product.php:155
+msgid "Failed to sync product with Bagisto."
+msgstr ""
+
+#: helper/sync/product/class-wkwctobag-sync-product.php:175
+msgid "Product synced successfully."
+msgstr ""
+
+#: helper/sync/product/class-wkwctobag-sync-product.php:198
+msgid "Product not found."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:51
+msgid "Invalid tax sub-type."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:61
+msgid "Invalid tax rate ID."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:72
+msgid "Unsupported tax sub-type."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:212
+msgid "Tax rate update skipped."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:235
+#. translators: %d: WooCommerce tax rate ID
+msgid "Tax rate ID %d synced successfully."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:238
+msgid "Failed to sync tax rate."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:305
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:151
+msgid "Standard Rate"
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:385
+msgid "Failed to create fallback tax rate."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:437
+#. translators: %s is replaced with the WooCommerce tax class name.
+msgid "WooCommerce Synced Tax Class: %s"
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:447
+msgid "Tax class update skipped."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:470
+#. translators: %s: WooCommerce tax class name
+msgid "Tax class \"%s\" synced successfully."
+msgstr ""
+
+#: helper/sync/tax/class-wkwctobag-sync-tax.php:473
+msgid "Failed to sync tax category."
+msgstr ""
+
+#: helper/sync/user/class-wkwctobag-sync-user.php:53
+msgid "Invalid user ID."
+msgstr ""
+
+#: helper/sync/user/class-wkwctobag-sync-user.php:63
+#. translators: %d: User ID.
+msgid "Invalid user role for user id %d"
+msgstr ""
+
+#: helper/sync/user/class-wkwctobag-sync-user.php:75
+#. translators: %d: User ID.
+msgid "No user data found for user id %d"
+msgstr ""
+
+#: helper/sync/user/class-wkwctobag-sync-user.php:119
+msgid "User synced successfully with Bagisto."
+msgstr ""
+
+#: helper/sync/user/class-wkwctobag-sync-user.php:123
+msgid "Failed to sync user with Bagisto."
+msgstr ""
+
+#: helper/sync/user/class-wkwctobag-sync-user.php:156
+msgid "User not found."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:191
+msgid "Synchronization completed successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:192
+msgid "User synchronization completed successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:193
+msgid "Customer synchronization completed successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:194
+msgid "Product synchronization completed successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:195
+msgid "Category synchronization completed successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:196
+msgid "Attribute synchronization completed successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:197
+msgid "An error occurred during synchronization."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:198
+msgid "Another synchronization is already in progress. Please wait."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:199
+msgid "Syncing..."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:200
+msgid "Synchronizing users to Bagisto..."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:201
+msgid "Synchronizing customers to Bagisto..."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:202
+msgid "Synchronizing products to Bagisto..."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:203
+msgid "Synchronizing categories to Bagisto..."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:204
+msgid "Order synchronization completed successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:205
+msgid "Synchronizing orders to Bagisto..."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:206
+msgid "Tax synchronization completed successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:207
+msgid "Synchronizing taxes to Bagisto..."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:224
+#: includes/admin/class-wkwctobag-admin-functions.php:225
+msgid "WC to Bagisto"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:235
+#: includes/admin/class-wkwctobag-admin-functions.php:236
+msgid "Connection"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:244
+#: includes/admin/class-wkwctobag-admin-functions.php:245
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:253
+#: includes/admin/class-wkwctobag-admin-functions.php:254
+msgid "Bulk Sync"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:262
+#: includes/admin/class-wkwctobag-admin-functions.php:263
+msgid "Logs"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:346
+#: includes/admin/class-wkwctobag-admin-functions.php:399
+#: includes/admin/class-wkwctobag-admin-functions.php:483
+#: includes/admin/class-wkwctobag-admin-functions.php:536
+#: includes/admin/class-wkwctobag-admin-functions.php:586
+#: includes/admin/class-wkwctobag-admin-functions.php:729
+#: includes/admin/class-wkwctobag-admin-functions.php:784
+#: includes/admin/class-wkwctobag-admin-functions.php:846
+#: includes/admin/class-wkwctobag-admin-functions.php:921
+#: includes/admin/class-wkwctobag-admin-functions.php:974
+#: includes/admin/class-wkwctobag-admin-functions.php:1505
+#: includes/admin/class-wkwctobag-admin-functions.php:1741
+#: includes/admin/class-wkwctobag-admin-functions.php:1883
+#: includes/admin/class-wkwctobag-admin-functions.php:2109
+#: includes/admin/class-wkwctobag-admin-functions.php:2344
+msgid "Security check failed."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:354
+#: includes/admin/class-wkwctobag-admin-functions.php:489
+#: includes/admin/class-wkwctobag-admin-functions.php:542
+msgid "Search string can not be empty."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:376
+msgid "User fetched sucessfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:448
+msgid "Guest"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:457
+msgid "Customers fetched successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:510
+msgid "Product fetched sucessfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:563
+msgid "Category fetched successfully."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:612
+msgid "Please set default Bagisto user role in settings before bulk sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:622
+msgid ""
+"No user roles created in the Bagisto. First create the roles in Bagisto and "
+"set the default user role in the settings."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:633
+msgid ""
+"The selected default user role in settings does not exist in Bagisto. "
+"Please select a valid user role."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:640
+msgid "Please set default Bagisto customer group in settings before bulk sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:650
+msgid ""
+"No customer groups created in the Bagisto. First create the groups in "
+"Bagisto and set the default customer group in the settings."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:661
+msgid ""
+"The selected default customer group in settings does not exist in Bagisto. "
+"Please select a valid customer group."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:676
+msgid "No users found for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:676
+msgid "No customers found for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:706
+msgid ""
+"Bulk sync initiated successfully in the background. Please check the log "
+"for the report."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:745
+msgid "No categories found for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:762
+msgid ""
+"Bulk category sync initiated successfully in the background. Please check "
+"the log for the report."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:805
+msgid "No products found for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:823
+msgid ""
+"Bulk product sync initiated successfully in the background. Please check "
+"the log for the report."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:874
+msgid "All order statuses are excluded."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:880
+msgid "No orders found for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:898
+msgid ""
+"Bulk order sync initiated successfully in the background. Please check the "
+"log for the report."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:934
+msgid "No attributes found for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:951
+msgid ""
+"Bulk attribute sync initiated successfully in the background. Please check "
+"the log for the report."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:979
+msgid "Not connected with Bagisto. Please configure connection."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1039
+msgid ""
+"Bulk tax sync initiated successfully in the background. Please check the "
+"log for the report."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1042
+msgid "No tax rates or classes found to sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1458
+#: includes/admin/class-wkwctobag-admin-functions.php:1485
+#: includes/admin/class-wkwctobag-admin-functions.php:1608
+#: includes/admin/class-wkwctobag-admin-functions.php:1721
+#: includes/admin/class-wkwctobag-admin-functions.php:1836
+#: includes/admin/class-wkwctobag-admin-functions.php:1863
+#: includes/admin/class-wkwctobag-admin-functions.php:2089
+#: includes/admin/class-wkwctobag-admin-functions.php:2297
+#: includes/admin/class-wkwctobag-admin-functions.php:2324
+msgid "Sync to Bagisto"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1478
+msgid "Sync users to Bagisto"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1484
+#: includes/admin/class-wkwctobag-admin-functions.php:1720
+#: includes/admin/class-wkwctobag-admin-functions.php:1862
+#: includes/admin/class-wkwctobag-admin-functions.php:2088
+#: includes/admin/class-wkwctobag-admin-functions.php:2323
+#: templates/admin/class-wkwctobag-connection.php:197
+msgid "Cancel"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1521
+msgid "No users selected for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1587
+#. translators: 1: user count, 2: customer count
+msgid "Initiated sync for %1$d users and %2$d customers in the background."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1623
+#: includes/admin/class-wkwctobag-admin-functions.php:1962
+msgid "Bagisto Mapping"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1677
+msgid "This category ID does not exist in Bagisto."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1678
+msgid "Stale Mapping"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1691
+#: includes/admin/class-wkwctobag-admin-functions.php:2004
+#: includes/admin/class-wkwctobag-admin-functions.php:2048
+#: includes/admin/class-wkwctobag-admin-functions.php:2450
+msgid "Not Mapped"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1714
+msgid "Sync categories to Bagisto"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1757
+msgid "No categories selected for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1817
+#. translators: %d: category count
+msgid "Initiated sync for %d categories in the background."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1856
+msgid "Sync products to Bagisto"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1899
+msgid "No products selected for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1939
+#. translators: %d: product count
+msgid "Initiated sync for %d products in the background."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1986
+#: templates/admin/settings/class-wkwctobag-settings.php:35
+msgid "User"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:1994
+#: templates/admin/settings/class-wkwctobag-settings.php:36
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:144
+msgid "Customer"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2022
+#: includes/admin/class-wkwctobag-admin-functions.php:2026
+#: includes/admin/class-wkwctobag-admin-functions.php:2423
+#: includes/admin/class-wkwctobag-admin-functions.php:2427
+msgid "Bagisto ID"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2069
+msgid "Sync Attributes to Bagisto"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2074
+msgid ""
+"You have selected attributes to synchronize. This will create or update "
+"their corresponding attributes and all variations/options in Bagisto "
+"Catalog."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2079
+msgid "Force Update Existing Attributes?"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2082
+msgid "Yes, overwrite existing data"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2083
+msgid "No, only sync missing/new data"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2125
+msgid "No attributes selected for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2159
+#. translators: %d: attribute count
+msgid "Initiated sync for %d attributes in the background."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2217
+msgid "Unauthorized."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2234
+msgid "Store URL and API Token are required."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2251
+#: includes/admin/class-wkwctobag-admin-functions.php:2287
+#. translators: %s: error message from API
+#. translators: %s: error message
+msgid "Connection failed: %s"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2267
+msgid "Connection successful! API is reachable."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2270
+#. translators: %s: admin email
+msgid "Connection successful! Logged in as %s."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2279
+msgid "Invalid token or API error."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2317
+msgid "Sync orders to Bagisto"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2360
+msgid "No orders selected for sync."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2400
+#. translators: %d: order count
+msgid "Initiated sync for %d orders in the background."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2498
+#. translators: %s: connection page URL
+msgid ""
+"WooCommerce to Bagisto connection is not established. Please configure your "
+"credentials on the <a href=\"%s\">Connection page</a> to enable "
+"synchronization."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2508
+#. translators: %s: connection page URL
+msgid ""
+"Your Bagisto API token has expired or is invalid. Please visit the <a "
+"href=\"%s\">Connection page</a> to update it."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2523
+msgid "Bagisto Sync for WooCommerce"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2549
+msgid "No order context found."
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2557
+msgid "Bagisto Order ID:"
+msgstr ""
+
+#: includes/admin/class-wkwctobag-admin-functions.php:2562
+msgid "This order has not been synchronized to Bagisto yet."
+msgstr ""
+
+#: includes/autoload.php:55
+#. translators: %s file path
+msgid "The file attempting to be loaded at %s does not exist."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:41
+msgid "User Sync"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:42
+msgid "Sync only non-customer WooCommerce users to Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:47
+msgid "Exclude Users"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:48
+msgid "Exclude users you do not want to sync."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:52
+msgid "Update Existing User"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:53
+msgid "Update already existing user with same email in Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:55
+#: templates/admin/class-wkwctobag-bulk-sync.php:89
+#: templates/admin/class-wkwctobag-bulk-sync.php:123
+#: templates/admin/class-wkwctobag-bulk-sync.php:152
+#: templates/admin/class-wkwctobag-bulk-sync.php:186
+#: templates/admin/class-wkwctobag-bulk-sync.php:215
+#: templates/admin/class-wkwctobag-bulk-sync.php:253
+msgid "Yes"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:56
+#: templates/admin/class-wkwctobag-bulk-sync.php:90
+#: templates/admin/class-wkwctobag-bulk-sync.php:124
+#: templates/admin/class-wkwctobag-bulk-sync.php:153
+#: templates/admin/class-wkwctobag-bulk-sync.php:187
+#: templates/admin/class-wkwctobag-bulk-sync.php:216
+#: templates/admin/class-wkwctobag-bulk-sync.php:254
+msgid "No"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:60
+msgid "Sync User Now"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:75
+msgid "Customer Sync"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:76
+msgid "Sync only customer roles from WooCommerce to Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:81
+msgid "Exclude Customers"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:82
+msgid "Exclude customers you do not want to sync."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:86
+msgid "Update Existing Customer"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:87
+msgid "Update already existing customer with same email in Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:94
+msgid "Sync Customer Now"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:109
+msgid "Category Sync"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:110
+msgid "Sync Categories from WooCommerce to Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:115
+msgid "Exclude Categories "
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:116
+msgid "Exclude categories you do not want to sync."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:120
+msgid "Update Existing Categories"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:121
+msgid "Update existing categories with already synced category in Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:128
+msgid "Sync Category Now"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:143
+msgid "Attribute Sync"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:144
+msgid "Sync Attributes from WooCommerce to Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:149
+msgid "Update Existing Attributes"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:150
+msgid "Update existing attributes with already synced attribute in Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:157
+msgid "Sync Attribute Now"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:172
+msgid "Product Sync"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:173
+msgid "Sync Products from WooCommerce to Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:178
+msgid "Exclude Products "
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:179
+msgid "Exclude products you do not want to sync."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:183
+msgid "Update Existing Products"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:184
+msgid ""
+"Update existing products with already synced product in Bagisto or SKU "
+"already available."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:191
+msgid "Sync Product Now"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:206
+msgid "Taxes Sync"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:207
+msgid "Sync tax classes and rates from WooCommerce to Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:212
+msgid "Update Existing Taxes"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:213
+msgid "Update already existing tax rate with same identifier in Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:220
+msgid "Sync Taxes Now"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:235
+msgid "Order Sync"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:236
+msgid "Sync orders from WooCommerce to Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:241
+msgid "Exclude Order Status"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:242
+msgid "Exclude order status you do not want to sync."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:250
+msgid "Update Existing Orders"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:251
+msgid "Update existing orders with already synced order in Bagisto."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-bulk-sync.php:258
+msgid "Sync Order Now"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:56
+msgid "Connection removed successfully."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:90
+msgid "Connect WooCommerce with Bagisto"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:91
+msgid ""
+"Enter your Bagisto store URL and API Personal Access Token to establish a "
+"secure connection."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:97
+#: templates/admin/class-wkwctobag-connection.php:130
+#: templates/admin/class-wkwctobag-connection.php:180
+msgid "Bagisto Store URL"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:97
+#: templates/admin/class-wkwctobag-connection.php:130
+msgid "The URL to your Bagisto store directory."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:100
+msgid "https://yourbagisto.com/"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:102
+msgid "Example: https://yourbagisto.com/"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:106
+#: templates/admin/class-wkwctobag-connection.php:188
+msgid "Bagisto API Token (Personal Access Token)"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:106
+msgid ""
+"Generate this token in your Bagisto Admin Panel under My Account -> "
+"Personal Access Tokens."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:109
+msgid "Enter Bagisto API Token"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:116
+#: templates/admin/class-wkwctobag-connection.php:155
+msgid "Test Connection"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:121
+msgid "Connect Store"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:138
+msgid "Connected Admin Email Address"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:138
+msgid "Connected Admin Email Address from Bagisto"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:146
+msgid "Connection Status"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:149
+msgid "Checking..."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:160
+msgid "Update Connection"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:163
+msgid "Disconnect"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:174
+msgid "Update Connection Details"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:191
+msgid "Enter API Token to save changes"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:199
+msgid "Save Changes"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:221
+msgid "Site URL is required."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:225
+msgid "API Token is required."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:229
+msgid "Invalid Site URL."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-connection.php:233
+msgid "Connected to Bagisto successfully."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:40
+msgid "Success:"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:40
+msgid "Log file deleted permanently."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:57
+#. translators: %d: number of expired log files cleaned
+msgid "(%d expired file cleaned immediately)"
+msgid_plural "(%d expired files cleaned immediately)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/class-wkwctobag-logs.php:66
+msgid "Settings Saved:"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:66
+msgid "Log retention policy updated successfully."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:76
+#. translators: %d: number of log files cleaned
+msgid ""
+"Manual log cleanup completed. %d log file cleaned based on current "
+"retention policy."
+msgid_plural ""
+"Manual log cleanup completed. %d log files cleaned based on current "
+"retention policy."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/class-wkwctobag-logs.php:84
+msgid "Log Cleanup:"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:91
+msgid "LOGS"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:92
+msgid ""
+"Select a specific background process to view its recent synchronization "
+"activity."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:104
+msgid "Auto Delete Logs:"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:107
+msgid "Older than 1 Day"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:108
+msgid "Older than 15 Days"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:109
+msgid "Older than 30 Days"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:110
+msgid "Never (Keep Indefinitely)"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:114
+msgid "Save Policy"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:121
+msgid "Purge Expired Logs Now"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:144
+msgid "Permission Denied:"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:144
+msgid ""
+"The Bagisto Sync for WooCommerce does not have write permissions to the "
+"WordPress uploads directory. Background logs will not be recorded until "
+"server permissions are fixed."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:160
+msgid "Back to Log List"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:197
+msgid "Load More"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:201
+msgid "Refresh"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:205
+msgid "Download"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:212
+msgid "No log entries found."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:256
+msgid "Additional context"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:275
+msgid "No Logs Available"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:276
+msgid ""
+"Log files will appear here automatically once the background "
+"synchronization processes execute."
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:304
+msgid "Are you sure you want to permanently delete this log file?"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:305
+msgid "Delete"
+msgstr ""
+
+#: templates/admin/class-wkwctobag-logs.php:308
+msgid "View Log"
+msgstr ""
+
+#: templates/admin/settings/class-wkwctobag-settings.php:37
+msgid "Product"
+msgstr ""
+
+#: templates/admin/settings/class-wkwctobag-settings.php:38
+msgid "Tax"
+msgstr ""
+
+#: templates/admin/settings/class-wkwctobag-settings.php:39
+msgid "Order"
+msgstr ""
+
+#: templates/admin/settings/class-wkwctobag-settings.php:47
+msgid "Connector Settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:93
+msgid "Customer Settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:94
+msgid "Configure your customer synchronization settings for customers."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:99
+msgid "Auto Sync Customer"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:100
+msgid ""
+"Automatically sync customer with Bagisto whenever new customer role "
+"registered."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:102
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:110
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:114
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:122
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:123
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:131
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:153
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:161
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:233
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:241
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:120
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:104
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:112
+msgid "Enabled"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:103
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:111
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:115
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:123
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:124
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:132
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:154
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:162
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:234
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:242
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:121
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:105
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:113
+msgid "Disabled"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:107
+msgid "Auto Update Customer"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:108
+msgid ""
+"Automatically update customers with Bagisto whenever customer profile "
+"edited/updated."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:115
+msgid "Select Default Bagisto Customer Group"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:116
+msgid ""
+"Select default bagisto customer group for new customers and bulk sync "
+"customers"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:118
+msgid "- - - Select a default customer group - - -"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:129
+msgid "Select Default Bagisto Customer Gender"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:130
+msgid "Select default bagisto customer gender for customers"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:132
+msgid "Male"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:133
+msgid "Female"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:134
+msgid "Other"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:138
+msgid "Select Default Bagisto Customer Status"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:139
+msgid ""
+"Select default bagisto customer status for new customers and bulk sync "
+"customers"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:141
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:134
+msgid "Active"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:142
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:135
+msgid "Inactive"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:151
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:228
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:251
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:183
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:144
+msgid "Save Configurations"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-customer-settings.php:172
+msgid "Customer settings saved successfully."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:105
+msgid "Order Settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:106
+msgid "Configure your order synchronization settings for orders."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:111
+msgid "Auto Sync Order"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:112
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:128
+msgid "Automatically sync orders with Bagisto whenever new order placed."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:119
+msgid "Update Order"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:120
+msgid "Automatically update orders with Bagisto whenever order status changes."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:127
+msgid "Allowed Order Status"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:136
+msgid "Bagisto Customer for Guest Orders"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:137
+msgid ""
+"Select a Bagisto customer for guest orders. Leave blank to auto-create "
+"guests."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:139
+msgid "- - - Search and Select a Bagisto Customer - - -"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:180
+msgid "Order Status Mappings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:181
+msgid "Map WooCommerce order statuses to Bagisto transition actions."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:189
+msgid "WooCommerce Status"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:190
+msgid "Bagisto Action"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:196
+msgid "Pending"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:197
+msgid "Processing (Create Invoice)"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:198
+msgid "Complete (Create Invoice & Shipment)"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:199
+msgid "Cancel Order"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:200
+msgid "Closed (Refund)"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-order-settings.php:256
+msgid "Order settings saved successfully."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:113
+msgid "Products Settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:114
+msgid "Configure your product synchronization settings for products."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:115
+msgid ""
+"Note: Categories and attributes will also be mapped with Bagisto whenever "
+"products are synced."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:120
+msgid "Auto Sync Products"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:121
+msgid "Automatically sync products with Bagisto whenever new product added."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:128
+msgid "Update Product"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:129
+msgid ""
+"Automatically update products with Bagisto whenever anything changes in the "
+"product."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:144
+msgid "Category Settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:145
+msgid "Configure your category synchronization settings."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:150
+msgid "Auto Sync Categories"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:151
+msgid "Automatically sync categories with Bagisto whenever new category added."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:158
+msgid "Update Categories"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:159
+msgid ""
+"Automatically update categories with Bagisto whenever anything changes in "
+"the category."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:176
+msgid "Map Category"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:177
+msgid "Map your category with bagisto category."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:185
+msgid "WooCommerce Category"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:186
+msgid "Bagisto Category"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:203
+msgid "Select Bagisto Category"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:224
+msgid "Attribute Settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:225
+msgid "Configure your attribute synchronization settings."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:230
+msgid "Auto Sync Attributes"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:231
+msgid "Automatically sync attributes with Bagisto whenever new attribute added."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:238
+msgid "Update Attributes"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:239
+msgid ""
+"Automatically update attributes with Bagisto whenever anything changes in "
+"the attribute."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-product-settings.php:283
+msgid "Product settings saved successfully."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:111
+msgid "Tax Settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:112
+msgid ""
+"Configure WooCommerce tax settings and map tax classes with Bagisto tax "
+"categories."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:117
+msgid "Auto Sync Taxes"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:118
+msgid "Automatically sync tax rates/classes with Bagisto when created or updated."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:135
+msgid "Map Tax Classes"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:136
+msgid "Map WooCommerce tax classes to Bagisto tax categories."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:144
+msgid "WooCommerce Tax Class"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:145
+msgid "Bagisto Tax Category"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:164
+msgid "Select Bagisto Tax Category"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-tax-settings.php:212
+msgid "Tax settings saved successfully."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:95
+msgid "User Settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:96
+msgid "Configure your user synchronization settings for users."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:101
+msgid "Auto Sync User"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:102
+msgid "Automatically sync users with Bagisto whenever new user registered."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:109
+msgid "Auto Update User"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:110
+msgid ""
+"Automatically update users with Bagisto whenever user profile "
+"edited/updated."
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:117
+msgid "Select Default Bagisto User Role"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:118
+msgid "Select default bagisto user role for new user and bulk sync users"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:120
+msgid "- - - Select a default user role - - -"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:131
+msgid "Select Default Bagisto User Status"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:132
+msgid "Select default bagisto user status for new user and bulk sync users"
+msgstr ""
+
+#: templates/admin/settings/tabs/class-wkwctobag-user-settings.php:165
+msgid "User settings saved successfully."
+msgstr ""

@@ -1,0 +1,53 @@
+# Normalise line endings across platforms.
+* text=auto eol=lf
+
+*.php    text diff=php
+*.js     text
+*.json   text
+*.scss   text
+*.css    text
+*.md     text
+*.txt    text
+*.pot    text
+*.po     text
+*.yml    text
+*.sh     text eol=lf
+
+# Binary assets — never diff or normalise these.
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.woff   binary
+*.woff2  binary
+*.ttf    binary
+*.eot    binary
+*.mo     binary
+
+# Linguist: keep generated files out of the language statistics and diffs.
+assets/js/admin.js   linguist-generated=true
+assets/css/admin.css linguist-generated=true
+package-lock.json    linguist-generated=true
+composer.lock        linguist-generated=true
+
+# Keep development-only files out of GitHub source archives, so that a
+# "Download ZIP" of this repository is a directly installable plugin.
+/.distignore        export-ignore
+/.editorconfig      export-ignore
+/.gitattributes     export-ignore
+/.github            export-ignore
+/.gitignore         export-ignore
+/CODE_OF_CONDUCT.md export-ignore
+/CONTRIBUTING.md    export-ignore
+/Gruntfile.js       export-ignore
+/RELEASING.md       export-ignore
+/babel.config.js    export-ignore
+/bin                export-ignore
+/composer.json      export-ignore
+/composer.lock      export-ignore
+/package-lock.json  export-ignore
+/package.json       export-ignore
+/phpcs.xml.dist     export-ignore
+/src                export-ignore
+/webpack.config.js  export-ignore
