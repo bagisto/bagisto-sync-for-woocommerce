@@ -1,6 +1,6 @@
 # Bagisto Sync for WooCommerce
 
-[![CI](https://github.com/bagisto/woocommerce-connector/actions/workflows/ci.yml/badge.svg)](https://github.com/bagisto/woocommerce-connector/actions/workflows/ci.yml)
+[![CI](https://github.com/bagisto/bagisto-sync-for-woocommerce/actions/workflows/ci.yml/badge.svg)](https://github.com/bagisto/bagisto-sync-for-woocommerce/actions/workflows/ci.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![WordPress](https://img.shields.io/badge/WordPress-6.5%2B-21759b.svg)](https://wordpress.org/)
 [![WooCommerce](https://img.shields.io/badge/WooCommerce-9.0%2B-96588a.svg)](https://woocommerce.com/)
@@ -169,14 +169,14 @@ add_filter( 'https_ssl_verify', '__return_false' );
 ### From a release archive
 
 1. Copy the plugin into your site as `wp-content/plugins/bagisto-sync-for-woocommerce/`.
-   The plugin's text domain, `readme.txt`, `package.json` and `composer.json` all use the slug **`bagisto-sync-for-woocommerce`**, so use that as the directory name. Note that the *repository* is named `woocommerce-connector`, so a default `git clone` produces a directory with the wrong name — clone into the slug explicitly, as shown below.
+   The plugin's text domain, `readme.txt`, `package.json` and `composer.json` all use the slug **`bagisto-sync-for-woocommerce`**, which matches the repository name, so a plain `git clone` already produces a correctly named directory.
 2. Activate **Bagisto Sync for WooCommerce** from **Plugins** in the WordPress admin. WooCommerce must be installed and active.
 3. Open the new **WC to Bagisto** menu in the admin sidebar.
 
 ### From this repository
 
 ```bash
-git clone https://github.com/bagisto/woocommerce-connector.git bagisto-sync-for-woocommerce
+git clone https://github.com/bagisto/bagisto-sync-for-woocommerce.git bagisto-sync-for-woocommerce
 cd bagisto-sync-for-woocommerce
 npm install
 npm run buildr        # produces assets/js/admin.js and assets/css/admin.css
@@ -552,8 +552,8 @@ All participants are expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md
 
 | I want to… | Go to |
 | --- | --- |
-| Report a reproducible bug in this plugin | [Open an issue](https://github.com/bagisto/woocommerce-connector/issues/new/choose) using the bug report template |
-| Request a feature | [Open an issue](https://github.com/bagisto/woocommerce-connector/issues/new/choose) using the feature request template |
+| Report a reproducible bug in this plugin | [Open an issue](https://github.com/bagisto/bagisto-sync-for-woocommerce/issues/new/choose) using the bug report template |
+| Request a feature | [Open an issue](https://github.com/bagisto/bagisto-sync-for-woocommerce/issues/new/choose) using the feature request template |
 | Report a security vulnerability | **Not** a public issue — follow [SECURITY.md](SECURITY.md) |
 | Get help with my specific store, or commission custom work | [Webkul support desk](https://webkul.com/ticket/) |
 | Ask a general Bagisto question | [Bagisto community](https://bagisto.com/en/) |
@@ -598,7 +598,7 @@ This project follows [Semantic Versioning](https://semver.org/). Given `MAJOR.MI
 
 The following are treated as a **public contract** and only change in a MAJOR release: the `wkwctobag_*` option names, the `__wkwctobag_bagisto_*` meta keys, the `wkwctobag_modify_capabilities` filter, the `wkwctobag_settings_tab_*` actions, the `wkwctobag_*` AJAX action names, the `wkwctobag_delayed_*` scheduled events and the `wp_wkwctobag_sync_<type>_*` background-process hook prefixes.
 
-Releases are tagged `vX.Y.Z` and published on the [releases page](https://github.com/bagisto/woocommerce-connector/releases). Every release is described in [CHANGELOG.md](CHANGELOG.md).
+Releases are tagged `vX.Y.Z` and published on the [releases page](https://github.com/bagisto/bagisto-sync-for-woocommerce/releases). Every release is described in [CHANGELOG.md](CHANGELOG.md).
 
 ### Upgrading
 

@@ -93,7 +93,7 @@ Never claim a "tested up to" version you have not actually tested against.
 
 ## Pre-publication checklist (first public release only)
 
-The canonical repository is <https://github.com/bagisto/woocommerce-connector>.
+The canonical repository is <https://github.com/bagisto/bagisto-sync-for-woocommerce>.
 
 **Decisions that must be made by the project owner**
 

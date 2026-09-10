@@ -15,7 +15,7 @@ Security fixes are provided for the latest released version of Bagisto Sync for 
 
 Report them privately using either of the following channels:
 
-1. **GitHub private vulnerability reporting** — <https://github.com/bagisto/woocommerce-connector/security/advisories/new>, or the repository's **Security** tab → **Report a vulnerability**. This is the preferred channel.
+1. **GitHub private vulnerability reporting** — <https://github.com/bagisto/bagisto-sync-for-woocommerce/security/advisories/new>, or the repository's **Security** tab → **Report a vulnerability**. This is the preferred channel.
    <!-- MAINTAINER TODO: enable Settings → Code security → "Private vulnerability reporting" before publishing, otherwise the link above 404s. -->
 2. **Webkul support desk** — <https://webkul.com/ticket/>, marking the ticket clearly as a **security report** so it is routed privately.
 

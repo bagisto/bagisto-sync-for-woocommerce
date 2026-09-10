@@ -122,6 +122,26 @@ feature was added or removed, and no admin screen, layout or workflow changed.
   exactly once. The rewritten expressions were checked against the originals
   across 1,110 truth-table combinations with zero divergence.
 - The `coding-standards` CI job is now blocking rather than advisory.
+- **Stopped this plugin from contributing to the WordPress 6.7+
+  `_load_textdomain_just_in_time` notice for the `woocommerce` text domain.**
+  `WP_Background_Process::schedule_cron_healthcheck()` — the copy WooCommerce
+  bundles — builds its schedule label with `__( 'Every %d minutes', 'woocommerce' )`
+  and is hooked to `cron_schedules` from the parent constructor. This plugin
+  creates one queue per sync type on `plugins_loaded`, which placed seven
+  `woocommerce`-translating callbacks ahead of any code reading the cron
+  schedules. `Wkwctobag_Background_Process` now overrides that method and
+  returns the schedules untouched, because `wkwctobag_register_cron_schedules()`
+  in the main plugin file already registers the same seven keys at the same 300
+  second interval using this plugin's own text domain. Verified on WordPress
+  6.8.3 with WooCommerce 9.6.0 and on WordPress 7.1 with WooCommerce 11.0.0:
+  the same seven schedule keys, the same 300 second intervals, the queue API
+  intact, and zero notices.
+- Excluded `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `RELEASING.md` and
+  `THIRD-PARTY-NOTICES.md` from Plugin Check's `unexpected_markdown_file`
+  check. They are contributor documentation and are already excluded from the
+  distributed package.
+- Updated every repository URL after the GitHub repository was renamed from
+  `bagisto/woocommerce-connector` to `bagisto/bagisto-sync-for-woocommerce`.
 
 ## [1.0.0] - 2026-08-05
 
@@ -143,5 +163,5 @@ feature was added or removed, and no admin screen, layout or workflow changed.
   rotation, a configurable retention policy and a daily cleanup cron.
 - WooCommerce High-Performance Order Storage (HPOS) compatibility.
 
-[Unreleased]: https://github.com/bagisto/woocommerce-connector/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/bagisto/woocommerce-connector/releases/tag/v1.0.0
+[Unreleased]: https://github.com/bagisto/bagisto-sync-for-woocommerce/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/bagisto/bagisto-sync-for-woocommerce/releases/tag/v1.0.0

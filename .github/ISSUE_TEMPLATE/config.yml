@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: 🔒 Report a security vulnerability
-    url: https://github.com/bagisto/woocommerce-connector/security/advisories/new
+    url: https://github.com/bagisto/bagisto-sync-for-woocommerce/security/advisories/new
     about: >
       Never report security issues in a public issue. Use GitHub private
       vulnerability reporting, or the Webkul support desk marked as a security
@@ -10,7 +10,7 @@ contact_links:
     url: https://webkul.com/ticket/
     about: For store-specific help, custom work and commercial support.
   - name: 📖 Documentation
-    url: https://github.com/bagisto/woocommerce-connector#readme
+    url: https://github.com/bagisto/bagisto-sync-for-woocommerce#readme
     about: Installation, configuration, hooks reference, troubleshooting and FAQ.
   - name: 🌐 Bagisto community
     url: https://bagisto.com/en/

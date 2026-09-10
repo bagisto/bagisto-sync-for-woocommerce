@@ -88,12 +88,16 @@ add_filter(
 					'.gitattributes',
 					'.gitignore',
 					'babel.config.js',
+					'CODE_OF_CONDUCT.md',
 					'composer.json',
 					'composer.lock',
+					'CONTRIBUTING.md',
 					'Gruntfile.js',
 					'package-lock.json',
 					'package.json',
 					'phpcs.xml.dist',
+					'RELEASING.md',
+					'THIRD-PARTY-NOTICES.md',
 					'webpack.config.js',
 				)
 			)

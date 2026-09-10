@@ -9,7 +9,7 @@ body:
         Thanks for taking the time to file a report.
 
         **Do not report security vulnerabilities here.** Follow the private
-        process in [SECURITY.md](https://github.com/bagisto/woocommerce-connector/blob/main/SECURITY.md) instead.
+        process in [SECURITY.md](https://github.com/bagisto/bagisto-sync-for-woocommerce/blob/main/SECURITY.md) instead.
 
         **Redact before posting:** never paste Bagisto API tokens, customer
         names, e-mail addresses, order contents or full log files.

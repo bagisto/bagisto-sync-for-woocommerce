@@ -59,6 +59,35 @@ if ( ! class_exists( 'Wkwctobag_Background_Process' ) ) {
 		}
 
 		/**
+		 * Register this queue's cron health-check schedule.
+		 *
+		 * Overrides WP_Background_Process::schedule_cron_healthcheck().
+		 *
+		 * The parent implementation registers this queue's schedule key with a
+		 * label built from __( 'Every %d minutes', 'woocommerce' ). Because it is
+		 * hooked to `cron_schedules` in the parent constructor, and this plugin
+		 * builds one queue per sync type on `plugins_loaded`, that puts several
+		 * callbacks translating the `woocommerce` text domain in front of any
+		 * code that reads the cron schedules. On WordPress 6.7 and later that can
+		 * raise the "_load_textdomain_just_in_time was called incorrectly ...
+		 * triggered too early" notice, which is attributed to this plugin.
+		 *
+		 * The schedule itself is already registered by
+		 * wkwctobag_register_cron_schedules() in the main plugin file, using the
+		 * same key and the same 300 second interval, so the parent registration is
+		 * a duplicate. Returning the schedules untouched keeps the interval and
+		 * the key exactly as they were while leaving the translation to the main
+		 * plugin file, which uses this plugin's own text domain.
+		 *
+		 * @param array $schedules Existing cron schedules.
+		 *
+		 * @return array Cron schedules, unchanged.
+		 */
+		public function schedule_cron_healthcheck( $schedules ) {
+			return $schedules;
+		}
+
+		/**
 		 * Is background task processing.
 		 */
 		public function is_background_processing() {

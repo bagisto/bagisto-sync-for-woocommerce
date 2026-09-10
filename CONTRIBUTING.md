@@ -50,7 +50,7 @@ You need:
 ### Setup
 
 ```bash
-git clone https://github.com/bagisto/woocommerce-connector.git bagisto-sync-for-woocommerce
+git clone https://github.com/bagisto/bagisto-sync-for-woocommerce.git bagisto-sync-for-woocommerce
 cd bagisto-sync-for-woocommerce
 
 # Front-end build toolchain
