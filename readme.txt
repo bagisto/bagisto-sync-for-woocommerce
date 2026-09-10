@@ -60,8 +60,19 @@ The plugin does not ship an uninstall routine, so its settings, the WooCommerce-
 
 = 1.0.0 =
 * Initial release.
+* Secure token authentication: connect to Bagisto with a Personal Access Token, with live connection verification.
+* Dedicated settings tabs for Users, Customers, Products, Categories, Attributes, Taxes and Orders.
+* Selective bulk sync from the native Users, Categories, Products and Orders list tables.
+* Auto-sync and auto-update toggles per entity, for both creation and update events.
+* One-to-one mapping tables for WooCommerce categories and tax classes, and order status mapping.
+* Background queue processing per entity type, with a five-minute health check and automatic retry for failed items.
+* Real-time polling progress bar and toast notifications during a sync.
+* Embedded log viewer with request and response detail, raw log download, 5 MB rotation, a configurable retention policy and a daily cleanup cron.
+* WooCommerce High-Performance Order Storage (HPOS) compatibility.
+* TLS certificate verification is enforced on every request to the Bagisto API.
+* Every admin AJAX endpoint requires both a valid nonce and the manage_woocommerce capability.
 
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of Bagisto Sync for WooCommerce.
+Initial release of Bagisto Sync for WooCommerce. Requires WooCommerce 9.0 or newer and a Bagisto store with an Admin API Personal Access Token. Your Bagisto host must present a valid TLS certificate, because certificate verification is enforced on all API requests.

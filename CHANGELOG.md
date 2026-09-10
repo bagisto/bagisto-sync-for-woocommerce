@@ -5,17 +5,47 @@ All notable changes to **Bagisto Sync for WooCommerce** are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-> **Maintainer note:** if `1.0.0` has not been published anywhere yet, fold the
-> `[Unreleased]` section below into `[1.0.0]` and delete this note. If `1.0.0`
-> *has* been published, release the entries below as `1.0.1` instead and bump
-> the version in `bagisto-sync-for-woocommerce.php` (header + `WKWCTOBAG_VERSION`
-> + `WKWCTOBAG_SCRIPT_VERSION`), `readme.txt` (`Stable tag`) and `package.json`.
-> See [RELEASING.md](RELEASING.md).
-
 ## [Unreleased]
 
-Release-readiness hardening ahead of the first public open-source release. No
-feature was added or removed, and no admin screen, layout or workflow changed.
+_Nothing yet._
+
+## [1.0.0] - 2026-09-10
+
+First public release.
+
+The connector itself was built before this repository was opened. The sections
+below record both what it ships and the release-readiness work carried out
+immediately before publication, so that the security and packaging decisions
+are on record rather than lost in history.
+
+### Added
+
+- Secure token authentication: connect to Bagisto using a Personal Access Token
+  with live connection verification.
+- Dedicated settings tabs for Users, Customers, Products, Categories,
+  Attributes, Taxes and Orders.
+- Selective bulk sync directly from the native Users, Categories, Products and
+  Orders list tables.
+- Auto-sync and auto-update toggles per entity for creation and update events.
+- One-to-one mapping tables for WooCommerce categories and tax classes.
+- Background queue processing with a five-minute health check and automated
+  retry for failed tasks.
+- Real-time polling progress bar and floating toast notifications.
+- Embedded log viewer with request/response detail, raw log download, log
+  rotation, a configurable retention policy and a daily cleanup cron.
+- WooCommerce High-Performance Order Storage (HPOS) compatibility.
+- `README.md` — full project documentation.
+- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `RELEASING.md`,
+  `THIRD-PARTY-NOTICES.md`, `CHANGELOG.md`.
+- `.gitignore` (expanded), `.gitattributes`, `.editorconfig`, `.distignore`.
+- `composer.json` and `phpcs.xml.dist` for PHP linting and WordPress/WooCommerce
+  coding standards. The plugin still has **no PHP runtime dependencies** and
+  ships no `vendor/` directory.
+- GitHub issue and pull-request templates, a Dependabot configuration, and a CI
+  workflow running PHP lint, coding standards, WordPress Plugin Check, an
+  i18n text-domain check and a build verification.
+- Explicit `Copyright (C) 2026 Webkul` notice and an SPDX identifier in the main
+  plugin file.
 
 ### Security
 
@@ -82,21 +112,6 @@ feature was added or removed, and no admin screen, layout or workflow changed.
 - Aligned the Plugin Check ignore lists in the main plugin file with the files
   the repository actually contains.
 - Corrected the stale product name printed by `bin/build.sh`.
-
-### Added
-
-- `README.md` — full project documentation.
-- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `RELEASING.md`,
-  `THIRD-PARTY-NOTICES.md`, `CHANGELOG.md`.
-- `.gitignore` (expanded), `.gitattributes`, `.editorconfig`, `.distignore`.
-- `composer.json` and `phpcs.xml.dist` for PHP linting and WordPress/WooCommerce
-  coding standards. The plugin still has **no PHP runtime dependencies** and
-  ships no `vendor/` directory.
-- GitHub issue and pull-request templates, a Dependabot configuration, and a CI
-  workflow running PHP lint, coding standards, WordPress Plugin Check, an
-  i18n text-domain check and a build verification.
-- Explicit `Copyright (C) 2026 Webkul` notice and an SPDX identifier in the main
-  plugin file.
 
 ### Removed
 
@@ -171,26 +186,6 @@ feature was added or removed, and no admin screen, layout or workflow changed.
   Note that `WC tested up to` is still 10.9 even though the verification stack
   used WooCommerce 11.0.0; raise it separately when you are ready to make that
   claim too.
-
-## [1.0.0] - 2026-08-05
-
-### Added
-
-- Initial release.
-- Secure token authentication: connect to Bagisto using a Personal Access Token
-  with live connection verification.
-- Dedicated settings tabs for Users, Customers, Products, Categories,
-  Attributes, Taxes and Orders.
-- Selective bulk sync directly from the native Users, Categories, Products and
-  Orders list tables.
-- Auto-sync and auto-update toggles per entity for creation and update events.
-- One-to-one mapping tables for WooCommerce categories and tax classes.
-- Background queue processing with a five-minute health check and automated
-  retry for failed tasks.
-- Real-time polling progress bar and floating toast notifications.
-- Embedded log viewer with request/response detail, raw log download, log
-  rotation, a configurable retention policy and a daily cleanup cron.
-- WooCommerce High-Performance Order Storage (HPOS) compatibility.
 
 [Unreleased]: https://github.com/bagisto/bagisto-sync-for-woocommerce/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/bagisto/bagisto-sync-for-woocommerce/releases/tag/v1.0.0
