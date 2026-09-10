@@ -160,6 +160,17 @@ feature was added or removed, and no admin screen, layout or workflow changed.
 - The CI dependency-audit job no longer raises a failure annotation for
   build-toolchain advisories that never ship to a user's site. Only the
   production tree (`npm audit --omit=dev`) can fail that job.
+- Raised `Tested up to` from 7.0 to 7.1 in `readme.txt` and the plugin header,
+  clearing Plugin Check's `outdated_tested_upto_header` error. Backed by a run
+  on WordPress 7.1 with WooCommerce 11.0.0 and PHP 8.4: all 14 core classes
+  autoload, all 7 sync classes construct, the front-end sync hooks register,
+  the `wkwctobag_modify_capabilities` filter is honoured, all 7 cron schedules
+  register at 300 seconds, the log-cleanup event is scheduled, and there are no
+  notices, warnings or fatals. WordPress Plugin Check now reports no errors and
+  no warnings, including with `--include-experimental`.
+  Note that `WC tested up to` is still 10.9 even though the verification stack
+  used WooCommerce 11.0.0; raise it separately when you are ready to make that
+  claim too.
 
 ## [1.0.0] - 2026-08-05
 
